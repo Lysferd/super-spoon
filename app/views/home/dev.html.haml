@@ -1,0 +1,32 @@
+%sub= link_to '[home]', root_path
+%h1 Developer Panel
+
+%h2 Database Overview
+%table
+  %th Facility
+  %th Hosts
+  %th Appointments
+  - @facilities.each do |facility|
+    %tr
+      %td{ rowspan: rows_for(facility) }= link_to facility.name, facility
+      - facility.hosts.each do |host|
+        %td{ rowspan: rows_for(host) }= link_to host.name, host
+        - host.appointments.each do |appointment|
+          %td
+            = link_to appointment.description, appointment
+            with
+            = link_to appointment.visitor.name, appointment.visitor
+            from
+            = appointment.visitor.company
+            at
+            = appointment.created_at
+          </tr><tr>
+        </tr><tr>
+
+%h2 Resources:
+%h3
+  = link_to 'Facilities', facilities_path
+  = link_to 'Hosts', hosts_path
+  %s Companies
+  = link_to 'Visitor', visitors_path
+  = link_to 'Appointment', appointments_path

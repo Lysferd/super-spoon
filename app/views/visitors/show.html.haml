@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Cpf:
+  = @visitor.cpf
+%p
+  %strong Name:
+  = @visitor.name
+%p
+  %strong Company:
+  = @visitor.company
+= link_to 'Edit', edit_visitor_path(@visitor)
+|
+= link_to 'Back', visitors_path

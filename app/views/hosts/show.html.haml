@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @host.name
+%p
+  %strong Facility:
+  = @host.facility.name
+%p
+  Appointments:
+  = @host.appointments.count
+%p
+  - @host.appointments.each do |appointment|
+    = appointment.description
+    with
+    = appointment.visitor.name
+    %br
+= link_to 'Edit', edit_host_path(@host)
+|
+= link_to 'Back', hosts_path

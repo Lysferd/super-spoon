@@ -1,0 +1,23 @@
+%p#notice= notice
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+
+%h1
+  Facilities
+  = link_to '+', new_facility_path
+%table
+  %th Building Name
+  %th Residents (Hosts)
+  - @facilities.each do |facility|
+    %tr
+      %td{ rowspan: facility.hosts.count }= link_to facility.name, facility
+      - facility.hosts.map do |host|
+        %td= link_to host.name, host
+        </tr><tr>
+
+Total:
+= @facilities.count
+
+%p
+  %sub= link_to '[back]', :back

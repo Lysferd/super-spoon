@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Description:
+  = @appointment.description
+%p
+  %strong Host:
+  = link_to @appointment.host.name, @appointment.host
+%p
+  %strong Visitor:
+  = link_to @appointment.visitor.name, @appointment.visitor
+= link_to 'Edit', edit_appointment_path(@appointment)
+|
+= link_to 'Back', appointments_path

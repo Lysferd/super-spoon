@@ -1,0 +1,14 @@
+= form_with(model: facility, local: true) do |form|
+  - if facility.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(facility.errors.count, "error")
+        prohibited this facility from being saved:
+      %ul
+        - facility.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .actions
+    = form.submit
