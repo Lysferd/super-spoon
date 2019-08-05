@@ -1,0 +1,12 @@
+%form
+  %fieldset
+    Visitado:
+    %select
+      - @facilities.each do |f|
+        - f.hosts.each do |h|
+          %option= h.name
+    %button{type: "button"} Avançar
+    %p
+      Anotações:
+      %p
+        %textarea{rows: "3", cols: "60"}

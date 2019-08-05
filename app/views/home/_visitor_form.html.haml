@@ -1,0 +1,12 @@
+%form
+  %fieldset
+    %legend Visitante:
+    Nome:
+    %input{type: "text", name: "Nome"}
+    %p
+      Motivo de Visita:
+      %input{type: "radio", name: "purpose", id: "particular", value: "particular"} Particular
+      %input{type: "radio", name: "purpose", id: "service", value: "service"} Serviço
+    %p
+      Empresa:
+      %input{type: "text", name: "empresa"}

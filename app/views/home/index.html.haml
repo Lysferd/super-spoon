@@ -1,2 +1,14 @@
-%h1 Home#index
-I am root.
+Nova Visita para Local:
+%select
+  - @facilities.each do |f|
+    %option= f.name
+%button{type: "button"} Avançar
+%p
+  %form{method: "get"}
+    CPF:
+    %input{type: "text", name: "CPF"}
+    %input{type: "submit", value: "BUSCAR"}
+%p=render 'visitor_form'
+%p=render 'appointment_form'
+%p
+  %button{type: "submit"} Cadastrar Visita
