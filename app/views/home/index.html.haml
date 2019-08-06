@@ -1,8 +1,9 @@
-Nova Visita para Local:
-%select
-  - @facilities.each do |f|
-    %option= f.name
-%button{type: "button"} Avançar
+%form
+  Nova Visita para Local:
+  %select
+    - @facilities.each do |f|
+      %option= f.name
+  %button{type: "submit"} Avançar
 %p
   %form{method: "get"}
     CPF:
