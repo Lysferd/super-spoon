@@ -1,15 +1,29 @@
-%form
-  Nova Visita para Local:
-  %select
-    - @facilities.each do |f|
-      %option= f.name
-  %button{type: "submit"} Avançar
-%p
+%div{class: "container"}
   %form{method: "get"}
-    CPF:
-    %input{type: "text", name: "CPF"}
-    %input{type: "submit", value: "BUSCAR"}
-%p=render 'visitor_form'
-%p=render 'appointment_form'
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "facility"} Nova Visita para Local:
+      %div{class: "col-75"}
+        %select{name: "facility"}
+          - @facilities.each do |f|
+            - if @facility.present? && @facility == f.name
+              %option{selected: true}= f.name
+            - else
+              %option= f.name
+    %div{class: "row"}
+      %input{type: "submit", value: "Avançar"}
+- if @facility.present?
+  %div{class: "container"}
+    %form{method: "get"}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "CPF"} CPF:
+        %div{class: "col-75"}
+          %input{type: "number", name: "CPF", maxlength: 11, placeholder: "12345678901", required: true, size: 11}
+      %div{class: "row"}
+        %input{type: "hidden", name: "facility", value: @facility}
+        %input{type: "submit", value: "BUSCAR"}
+%div=render 'visitor_form'
+%div=render 'appointment_form'
 %p
   %button{type: "submit"} Cadastrar Visita

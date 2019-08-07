@@ -1,12 +1,17 @@
-%form
-  %fieldset
-    Visitado:
-    %select
-      - @facilities.each do |f|
-        - f.hosts.each do |h|
-          %option= h.name
-    %button{type: "button"} Avançar
-    %p
-      Anotações:
-      %p
+%div{class: "container"}
+  %form{method: "get"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "host"} Visitado:
+      %div{class: "col-75"}
+        %select{name: "host"}
+          - @facilities.each do |f|
+            - f.hosts.each do |h|
+              %option= h.name
+    %div{class: "row"}
+      %input{type: "submit", value: "Avançar"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "notes"} Anotações:
+      %div{class: "col-75"}
         %textarea{rows: "3", cols: "60"}

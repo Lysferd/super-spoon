@@ -1,12 +1,18 @@
-%form
-  %fieldset
-    %legend Visitante:
-    Nome:
-    %input{type: "text", name: "Nome"}
-    %p
-      Motivo de Visita:
-      %input{type: "radio", name: "purpose", id: "particular", value: "particular"} Particular
-      %input{type: "radio", name: "purpose", id: "service", value: "service"} Serviço
-    %p
-      Empresa:
-      %input{type: "text", name: "empresa"}
+%div{class: "container"}
+  %form{method: "get"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "name"} Nome:
+      %div{class: "col-75"}
+        %input{type: "text", name: "Nome", required: true}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "purpose"} Motivo:
+      %div{class: "col-75"}
+        %input{type: "radio", name: "purpose", id: "particular", value: "particular"} Particular
+        %input{type: "radio", name: "purpose", id: "service", value: "service"} Serviço
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "company"} Empresa:
+      %div{class: "col-75"}
+        %input{type: "text", name: "empresa"}
