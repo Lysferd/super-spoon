@@ -6,13 +6,19 @@
       %div{class: "col-75"}
         %select{name: "facility"}
           - @facilities.each do |f|
-            - if @facility.present? && @facility == f.name
-              %option{selected: true}= f.name
-            - else
-              %option= f.name
+            %option{selected: @facility == f.name}= f.name
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
-- if @facility.present?
+%div{class: "container"}
+  %form{method: "get"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "date"} Data da Visita:
+      %div{class: "col-75"}
+        %input{type: "hidden", id: "my-input", name: "date"}
+        %div{id: "my-datepicker"}
+        %input{type: "submit", value: "test"}
+- if @facility
   %div{class: "container"}
     %form{method: "get"}
       %div{class: "row"}
@@ -28,4 +34,20 @@
 %p
   %button{type: "submit"} Cadastrar Visita
 
-%input{type: "text", :data-provide => 'datepicker'}
+
+:javascript
+  $("#my-datepicker").datepicker({
+    language: "pt-BR"
+    });
+  $("#my-datepicker").on('changeDate', function () {
+    $("#my-input").val(
+      $("#my-datepicker").datepicker('getFormattedDate')
+      );
+  });
+
+//:javascript
+//  $(document).ready(function(){
+//    $('.datepicker').datepicker({
+//      format: 'dd/mm/yyyy'
+//    })
+//    });

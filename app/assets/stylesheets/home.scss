@@ -10,7 +10,7 @@ form {
   text-align: center;
 }
 
-/*input[type=text], */input[type=number], select, textarea {
+input[type=text], input[type=number], select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #ccc;
@@ -75,4 +75,12 @@ label {
     width: 100%;
     margin-top: 0;
   }
+}
+
+.dropdown-menu {
+  z-index: 1000;
+  top: 100%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.2);
+  list-style: none;
 }
