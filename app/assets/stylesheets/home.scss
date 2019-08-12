@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 * {
   box-sizing: border-box;
+  margin: auto;
 }
 
 form {
@@ -19,7 +20,7 @@ input[type=text], input[type=number], select, textarea {
 }
 
 input[type=radio] {
-  padding: 12px;
+  margin-top: 13px;
   text-align: center;
 }
 
@@ -83,4 +84,10 @@ label {
   background: #fff;
   border: 1px solid rgba(0,0,0,0.2);
   list-style: none;
+}
+
+.testStyle {
+  margin: auto;
+  width: 50%;
+  padding: 5px;
 }

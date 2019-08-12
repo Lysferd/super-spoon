@@ -2,35 +2,43 @@
   %form{method: "get"}
     %div{class: "row"}
       %div{class: "col-25"}
+        %label{for: "purpose"} Motivo de Visita:
+      %div{class: "col-75"}
+        %input{type: "radio", name: "purpose", id: "particular", value: "particular", required: true, checked: params[:purpose] == "particular"} Particular
+        %input{type: "radio", name: "purpose", id: "professional", value: "professional", required: true, checked: params[:purpose] == "professional"} Professional(Serviço)
+    %div{class: "row"}
+      %div{class: "col-25"}
         %label{for: "facility"} Nova Visita para Local:
       %div{class: "col-75"}
         %select{name: "facility"}
           - @facilities.each do |f|
-            %option{selected: @facility == f.name}= f.name
+            %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
-%div{class: "container"}
-  %form{method: "get"}
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "date"} Data da Visita:
-      %div{class: "col-75"}
-        %input{type: "hidden", id: "my-input", name: "date"}
-        %div{id: "my-datepicker"}
-        %input{type: "submit", value: "test"}
-- if @facility
+- if params[:facility] && params[:purpose]
   %div{class: "container"}
     %form{method: "get"}
       %div{class: "row"}
         %div{class: "col-25"}
           %label{for: "CPF"} CPF:
         %div{class: "col-75"}
-          %input{type: "number", name: "CPF", maxlength: 11, placeholder: "12345678901", required: true, size: 11}
+          %input{type: "text", name: "CPF", maxlength: 11, placeholder: "12345678901", required: true, size: 11, autofocus: true, minlength: 11, max: 99999999999}
       %div{class: "row"}
-        %input{type: "hidden", name: "facility", value: @facility}
+        %input{type: "hidden", name: "facility", value: [:facility]}
+        %input{type: "hidden", name: "purpose", value: [:purpose]}
         %input{type: "submit", value: "BUSCAR"}
 %div=render 'visitor_form'
 %div=render 'appointment_form'
+- if params[:purpose] && params[:facility]
+  %div{class: "container"}
+    %form{method: "get"}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "date"} Data da Visita:
+        %div{class: "col-75"}
+          %input{type: "hidden", id: "my-input", name: "date"}
+          %div{class: "testStyle", id: "my-datepicker"}
+          %input{type: "submit", value: "test"}
 %p
   %button{type: "submit"} Cadastrar Visita
 
