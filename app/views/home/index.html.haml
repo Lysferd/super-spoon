@@ -15,34 +15,36 @@
             %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
-- if params[:facility] && params[:purpose]
+- if params[:facility] && params[:purpose] && !@visit
   %div{class: "container"}
     %form{method: "get"}
       %div{class: "row"}
         %div{class: "col-25"}
-          %label{for: "CPF"} CPF:
+          %label{for: "cpf"} CPF:
         %div{class: "col-75"}
-          %input{type: "text", name: "CPF", maxlength: 11, placeholder: "12345678901", required: true, size: 11, autofocus: true, minlength: 11, max: 99999999999}
+          %input{type: "text", name: "cpf", maxlength: 11, placeholder: "12345678901", required: true, size: 11, autofocus: !params[:cpf], minlength: 11, max: 99999999999, value: params[:cpf]}
       %div{class: "row"}
-        %input{type: "hidden", name: "facility", value: [:facility]}
-        %input{type: "hidden", name: "purpose", value: [:purpose]}
-        %input{type: "submit", value: "BUSCAR"}
-%div=render 'visitor_form'
-%div=render 'appointment_form'
-- if params[:purpose] && params[:facility]
-  %div{class: "container"}
-    %form{method: "get"}
-      %div{class: "row"}
-        %div{class: "col-25"}
-          %label{for: "date"} Data da Visita:
-        %div{class: "col-75"}
-          %input{type: "hidden", id: "my-input", name: "date"}
-          %div{class: "testStyle", id: "my-datepicker"}
-          %input{type: "submit", value: "test"}
+        %input{type: "hidden", name: "facility", value: params[:facility]}
+        %input{type: "hidden", name: "purpose", value: params[:purpose]}
+        %input{type: "submit", value: "Buscar"}
+- if params[:facility] && params[:purpose] && params[:cpf]
+  %div=render 'visitor_form', visitor: @visitor
+- if @visit && params[:name]
+  %div=render 'appointment_form'
+  - if params[:purpose] && params[:facility]
+    %div{class: "container"}
+      %form{method: "get"}
+        %div{class: "row"}
+          %div{class: "col-25"}
+            %label{for: "date"} Data da Visita:
+          %div{class: "col-75"}
+            %input{type: "hidden", id: "my-input", name: "date"}
+            %div{class: "testStyle", id: "my-datepicker"}
+            %input{type: "submit", value: "test"}
 %p
   %button{type: "submit"} Cadastrar Visita
-
-
+%p=@visit
+%p=@appointment
 :javascript
   $("#my-datepicker").datepicker({
     language: "pt-BR"

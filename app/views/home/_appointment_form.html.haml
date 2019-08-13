@@ -4,11 +4,22 @@
       %div{class: "col-25"}
         %label{for: "host"} Visitado:
       %div{class: "col-75"}
-        %select{name: "host"}
+        %select{name: "host", required: true}
           - @facilities.each do |f|
             - f.hosts.each do |h|
-              %option= h.name
+              %option{value: h.id}= h.name
+    %div{class: "container"}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "date"} Data da Visita:
+        %div{class: "col-75"}
+          %input{type: "hidden", id: "my-input", name: "date"}
+          %div{class: "testStyle", id: "my-datepicker"}
     %div{class: "row"}
+      %input{type: "hidden", name: "facility", value: params[:facility]}
+      %input{type: "hidden", name: "purpose", value: params[:purpose]}
+      %input{type: "hidden", name: "cpf", value: @visit.cpf}
+      %input{type: "hidden", name: "facility", value: params[:facility]}
       %input{type: "submit", value: "Avançar"}
     %div{class: "row"}
       %div{class: "col-25"}

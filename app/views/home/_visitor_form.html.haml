@@ -4,15 +4,23 @@
       %div{class: "col-25"}
         %label{for: "name"} Nome:
       %div{class: "col-75"}
-        %input{type: "text", name: "Nome", required: true}
+        - if @visit
+          %input{type: "text", name: "name", required: true, value: @visit.name, readonly: true, disabled: true, autofocus: true}
+          %input{type: "hidden", name: "name", value: @visit.name}
+        - else
+          %input{type: "text", name: "name", required: true, autofocus: true}
+    - if params[:purpose] == "professional"
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "company"} Empresa:
+        %div{class: "col-75"}
+          - if @visit
+            %input{type: "text", name: "company", required: true, value: @visit.company, disabled: true}
+            %input{type: "hidden", name: "company", value: @visit.company}
+          - else
+            %input{type: "text", name: "company", required: true}
     %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "purpose"} Motivo:
-      %div{class: "col-75"}
-        %input{type: "radio", name: "purpose", id: "particular", value: "particular"} Particular
-        %input{type: "radio", name: "purpose", id: "service", value: "service"} Serviço
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "company"} Empresa:
-      %div{class: "col-75"}
-        %input{type: "text", name: "empresa"}
+      %input{type: "hidden", name: "facility", value: params[:facility]}
+      %input{type: "hidden", name: "purpose", value: params[:purpose]}
+      %input{type: "hidden", name: "cpf", value: params[:cpf]}
+      %input{type: "submit", value: "Avançar"}
