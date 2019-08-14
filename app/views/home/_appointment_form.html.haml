@@ -5,9 +5,8 @@
         %label{for: "host"} Visitado:
       %div{class: "col-75"}
         %select{name: "host", required: true}
-          - @facilities.each do |f|
-            - f.hosts.each do |h|
-              %option{value: h.id}= h.name
+          - @facility.hosts.each do |h|
+            %option{value: h.id}= h.name
     %div{class: "container"}
       %div{class: "row"}
         %div{class: "col-25"}
@@ -18,11 +17,12 @@
     %div{class: "row"}
       %input{type: "hidden", name: "facility", value: params[:facility]}
       %input{type: "hidden", name: "purpose", value: params[:purpose]}
-      %input{type: "hidden", name: "cpf", value: @visit.cpf}
-      %input{type: "hidden", name: "facility", value: params[:facility]}
+      %input{type: "hidden", name: "cpf", value: @visitor.cpf}
+      %input{type: "hidden", name: "name", value: @visitor.name}
+      %input{type: "hidden", name: "company", value: @visitor.company}
       %input{type: "submit", value: "Avançar"}
     %div{class: "row"}
       %div{class: "col-25"}
-        %label{for: "notes"} Anotações:
+        %label{for: "description"} Descrição:
       %div{class: "col-75"}
-        %textarea{rows: "3", cols: "60"}
+        %textarea{rows: "3", cols: "60", name: "description"}

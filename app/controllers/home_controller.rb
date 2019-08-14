@@ -2,26 +2,37 @@ class HomeController < ApplicationController
   def index
     @facilities = Facility.all
     @visitors = Visitor.all
-    if params[:facility]
+
+    if !@facility
       @facility = Facility.find_by(id: params[:facility].to_i)
     end
-    if params[:cpf]
-      cpf = params[:cpf]
-      @visit = Visitor.find_by(cpf: cpf)
-    end
-    if params[:name] && params[:cpf] && !@visit
-      @visit = Visitor.new(name: params[:name], cpf: params[:cpf], company: params[:company])
-    end
-    if @visit
-      @appointment = Appointment.new
-      if @visit.id
-        @appointment.visitor_id = @visit.id
+
+    if !@visitor
+      @visitor = Visitor.find_by(cpf: params[:cpf])
+      if !@visitor && params[:name]
+        @visitor = Visitor.new(cpf: params[:cpf], name: params[:name], company: params[:company])
       end
     end
-    if @visit && @appointment && params[:date] && params[:host]
+
+    if @visitor
+      @appointment = Appointment.new
+    end
+
+    if @visitor && @appointment && params[:date] && params[:host]
       @appointment.date = params[:date]
       @appointment.host_id = params[:host]
-      @appointment.save
+      @appointment.description = params[:description]
+      if @visitor.id
+        @appointment.visitor_id = @visitor.id
+      else
+        @visitor.save
+	@appointment.visitor_id = @visitor.id
+      end
+      if @appointment.save
+        redirect_to(@appointment)
+      else
+        redirect_to root_path
+      end
     end
   end
   def next

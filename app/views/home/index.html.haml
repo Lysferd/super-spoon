@@ -1,3 +1,5 @@
+%sub= link_to '[home]', root_path
+  
 %div{class: "container"}
   %form{method: "get"}
     %div{class: "row"}
@@ -15,7 +17,7 @@
             %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
-- if params[:facility] && params[:purpose] && !@visit
+- if params[:facility] && params[:purpose] && !@visitor
   %div{class: "container"}
     %form{method: "get"}
       %div{class: "row"}
@@ -28,23 +30,10 @@
         %input{type: "hidden", name: "purpose", value: params[:purpose]}
         %input{type: "submit", value: "Buscar"}
 - if params[:facility] && params[:purpose] && params[:cpf]
-  %div=render 'visitor_form', visitor: @visitor
-- if @visit && params[:name]
+  %div=render 'visitor_form'
+- if @visitor && params[:name]
   %div=render 'appointment_form'
-  - if params[:purpose] && params[:facility]
-    %div{class: "container"}
-      %form{method: "get"}
-        %div{class: "row"}
-          %div{class: "col-25"}
-            %label{for: "date"} Data da Visita:
-          %div{class: "col-75"}
-            %input{type: "hidden", id: "my-input", name: "date"}
-            %div{class: "testStyle", id: "my-datepicker"}
-            %input{type: "submit", value: "test"}
-%p
-  %button{type: "submit"} Cadastrar Visita
-%p=@visit
-%p=@appointment
+
 :javascript
   $("#my-datepicker").datepicker({
     language: "pt-BR"
@@ -54,10 +43,3 @@
       $("#my-datepicker").datepicker('getFormattedDate')
       );
   });
-
-//:javascript
-//  $(document).ready(function(){
-//    $('.datepicker').datepicker({
-//      format: 'dd/mm/yyyy'
-//    })
-//    });
