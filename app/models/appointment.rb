@@ -1,8 +1,4 @@
 class Appointment < ApplicationRecord
-  belongs_to :host
-  belongs_to :visitor
-
-  def verbose
-    return self.description + ' with ' + self.visitor.name
-  end
+  belongs_to :host, class_name: :Resident
+  belongs_to :visitor, class_name: :Employee, polymorphic: true
 end

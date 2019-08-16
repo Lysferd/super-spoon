@@ -5,3 +5,46 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+require 'faker'
+require 'cpf_gen'
+require 'cnpj_gen'
+
+# Create DEV user
+dev = User::create name: 'dev', password: 'dev'
+
+puts 'Generating data...'
+
+# Create some DATA
+10.times do
+  # Groups:
+  f = Facility::create name: Faker::Company.unique.name, created_by_id: dev.id 
+  puts f
+  c = Company::create name: Faker::Company.unique.name, cnpj: CNPJ::factory, created_by_id: dev.id
+  puts c
+  
+  # Entities:
+  10.times do
+    r = Resident::create name: Faker::Name.unique.name, facility: f, created_by_id: dev.id
+    puts r
+    e = Employee::create name: Faker::Name.unique.name, cpf: CPF::factory, company: c, created_by_id: dev.id
+    puts e
+    v = Visitor::create name: Faker::Name.unique.name, cpf: CPF::factory, created_by_id: dev.id
+    puts v
+  
+    # Appointments:
+    10.times do
+      professional = Faker::Boolean.boolean
+      visitor = professional ? e : v
+      type = visitor.class.name
+
+      puts Appointment::create description: Faker::Verb.base.capitalize + ?\s + Faker::Construction.material.downcase, date: Faker::Time.forward, professional: professional,
+        host_id: r.id,
+        visitor_type: type,
+        visitor_id: visitor.id,
+        created_by_id: dev.id
+    end
+  end
+end
+
+puts 'Done! お待たせ致しました！'

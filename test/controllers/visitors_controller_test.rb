@@ -17,7 +17,7 @@ class VisitorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create visitor" do
     assert_difference('Visitor.count') do
-      post visitors_url, params: { visitor: { company: @visitor.company, cpf: @visitor.cpf, name: @visitor.name } }
+      post visitors_url, params: { visitor: { cpf: @visitor.cpf, name: @visitor.name } }
     end
 
     assert_redirected_to visitor_url(Visitor.last)
@@ -34,7 +34,7 @@ class VisitorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update visitor" do
-    patch visitor_url(@visitor), params: { visitor: { company: @visitor.company, cpf: @visitor.cpf, name: @visitor.name } }
+    patch visitor_url(@visitor), params: { visitor: { cpf: @visitor.cpf, name: @visitor.name } }
     assert_redirected_to visitor_url(@visitor)
   end
 

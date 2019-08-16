@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @company.name
+%p
+  %b Cnpj:
+  = @company.cnpj
+
+%p
+  Employees:
+  - @company.employees.each do |employee|
+    = link_to employee.name, employee
+
+= link_to 'Edit', edit_company_path(@company)
+\|
+= link_to 'Back', companies_path

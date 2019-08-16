@@ -4,5 +4,6 @@ class HomeController < ApplicationController
 
   def dev
     @facilities = Facility.all
+    @companies = Company.all
   end
 end

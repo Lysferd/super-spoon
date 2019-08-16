@@ -1,0 +1,20 @@
+= form_with(model: employee, local: true) do |form|
+  - if employee.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(employee.errors.count, "error")
+        prohibited this employee from being saved:
+      %ul
+        - employee.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :cpf
+    = form.text_field :cpf, placeholder: 'XXX.XXX.XXX-XX', data: {mask: '999.999.999-99'}
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :company_id
+    = form.collection_select :company_id, @companies, :id, :name
+  .actions
+    = form.submit

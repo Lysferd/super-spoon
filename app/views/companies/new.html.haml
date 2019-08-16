@@ -1,0 +1,6 @@
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+  = link_to '[cancel]', companies_path
+%h1 New Company
+= render 'form', company: @company

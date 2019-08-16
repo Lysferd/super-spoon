@@ -15,14 +15,14 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   def new
     @appointment = Appointment.new
-    @hosts = Host.all
-    @visitors = Visitor.all
+    @residents = Resident.all
+    @employees = Employee.all
   end
 
   # GET /appointments/1/edit
   def edit
-    @hosts = Host.all
-    @visitors = Visitor.all
+    @residents = Resident.all
+    @employees = Employee.all
   end
 
   # POST /appointments
@@ -73,6 +73,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:description, :host_id, :visitor_id)
+      params.require(:appointment).permit(:description, :resident_id, :employee_id)
     end
 end

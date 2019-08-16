@@ -1,5 +1,6 @@
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+  = link_to '[cancel]', facilities_path
 %h1 Editing Facility
 = render 'form', facility: @facility
-= link_to 'Show', @facility
-|
-= link_to 'Back', facilities_path

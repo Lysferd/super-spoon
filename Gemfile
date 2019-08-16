@@ -30,6 +30,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'haml-rails'
 gem 'jquery_mask_rails'
 
+# Seeding helpers
+gem 'faker'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

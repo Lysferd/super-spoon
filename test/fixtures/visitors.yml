@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  cpf: MyString
   name: MyString
-  company: MyString
+  cpf: MyString
 
 two:
-  cpf: MyString
   name: MyString
-  company: MyString
+  cpf: MyString

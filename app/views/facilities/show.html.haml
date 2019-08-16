@@ -1,13 +1,30 @@
 %p#notice= notice
-%h6= link_to '盤', dev_path
-%table
-  %th 名
-  %th{colspan: @facility.hosts.count} 住人
-  %tr
-    %td
-      = @facility.name
-    - @facility.hosts.each do |host|
-      %td= link_to host.name, host
+
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+  = link_to '[return]', facilities_path
+
 %p
-  = link_to '一覧へ戻り', facilities_path
-  = link_to '情報更新', edit_facility_path(@facility)
+  %b Name:
+  = @facility.name
+%p
+  %b Hosts:
+  - if @facility.residents.empty?
+    None
+  - else
+    - @facility.residents.each do |resident|
+      = link_to resident.name, resident
+
+%p
+  Created by
+  = link_to @facility.created_by.name, @facility.created_by
+  at
+  = @facility.created_at
+  %br
+  - if @facility.updated?
+    Updated by
+    = link_to @facility.updated_by.name, @facility.updated_by
+    at
+    = @facility.updated_at
+%p= link_to 'Edit', edit_facility_path(@facility)

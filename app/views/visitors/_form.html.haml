@@ -1,20 +1,16 @@
-= form_with(model: visitor, local: true) do |form|
-  - if visitor.errors.any?
+= form_for @visitor do |f|
+  - if @visitor.errors.any?
     #error_explanation
-      %h2
-        = pluralize(visitor.errors.count, "error")
-        prohibited this visitor from being saved:
+      %h2= "#{pluralize(@visitor.errors.count, "error")} prohibited this visitor from being saved:"
       %ul
-        - visitor.errors.full_messages.each do |message|
+        - @visitor.errors.full_messages.each do |message|
           %li= message
+
   .field
-    = form.label :cpf
-    = form.text_field :cpf, placeholder: 'XXX.XXX.XXX-XX', data: {mask: '999.999.999-99'}
+    = f.label :name
+    = f.text_field :name
   .field
-    = form.label :name
-    = form.text_field :name
-  .field
-    = form.label :company
-    = form.text_field :company
+    = f.label :cpf
+    = f.text_field :cpf
   .actions
-    = form.submit
+    = f.submit 'Save'

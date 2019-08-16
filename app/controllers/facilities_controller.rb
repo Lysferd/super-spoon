@@ -24,7 +24,10 @@ class FacilitiesController < ApplicationController
   # POST /facilities
   # POST /facilities.json
   def create
-    @facility = Facility.new(facility_params)
+    params = facility_params
+    params[:created_by_id] = current_user.id
+
+    @facility = Facility.new(params)
 
     respond_to do |format|
       if @facility.save
@@ -40,8 +43,11 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1
   # PATCH/PUT /facilities/1.json
   def update
+    params = facility_params
+    params[:updated_by_id] = current_user.id
+
     respond_to do |format|
-      if @facility.update(facility_params)
+      if @facility.update(params)
         format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
         format.json { render :show, status: :ok, location: @facility }
       else

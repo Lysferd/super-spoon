@@ -1,13 +1,18 @@
 %p#notice= notice
+
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+  = link_to '[return]', users_path
+
 %p
-  %strong Name:
+  %b Name:
   = @user.name
 %p
-  %strong Password digest:
+  %b Password (hash):
   = @user.password_digest
 %p
-  %strong Salt:
-  = @user.salt
+  %b ID (internal):
+  = @user.id
+
 = link_to 'Edit', edit_user_path(@user)
-|
-= link_to 'Back', users_path

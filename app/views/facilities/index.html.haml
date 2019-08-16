@@ -5,19 +5,27 @@
 
 %h1
   Facilities
-  = link_to '+', new_facility_path
-%table
-  %th Building Name
-  %th Residents (Hosts)
-  - @facilities.each do |facility|
-    %tr
-      %td{ rowspan: facility.hosts.count }= link_to facility.name, facility
-      - facility.hosts.map do |host|
-        %td= link_to host.name, host
-        </tr><tr>
+  = link_to ?+, new_facility_path
 
-Total:
-= @facilities.count
+- if @facilities.empty?
+  %p No data found!
+- else
+  %table
+    %th Name
+    %th Residents [Hosts]
+    %th{ colspan: 3 } Actions
+    - @facilities.each do |facility|
+      %tr
+        %td= link_to facility.name, facility
+        - if facility.residents.empty?
+          %td (empty)
+        - else
+          %td
+            - facility.residents.each do |resident|
+              = link_to resident.name, resident
+        %td= link_to 'Show', facility
+        %td= link_to 'Edit', edit_facility_path(facility)
+        %td= link_to 'Delete', facility, method: :delete
 
-%p
-  %sub= link_to '[back]', :back
+  Total:
+  = @facilities.count

@@ -1,3 +1,3 @@
 class Facility < ApplicationRecord
-  has_many :hosts
+  has_many :residents
 end

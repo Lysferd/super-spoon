@@ -1,0 +1,17 @@
+= form_with(model: resident, local: true) do |form|
+  - if resident.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(resident.errors.count, "error")
+        prohibited this resident from being saved:
+      %ul
+        - resident.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :facility_id
+    = form.collection_select :facility_id, @facilities, :id, :name
+  .actions
+    = form.submit

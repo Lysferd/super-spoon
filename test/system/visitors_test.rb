@@ -14,7 +14,6 @@ class VisitorsTest < ApplicationSystemTestCase
     visit visitors_url
     click_on "New Visitor"
 
-    fill_in "Company", with: @visitor.company
     fill_in "Cpf", with: @visitor.cpf
     fill_in "Name", with: @visitor.name
     click_on "Create Visitor"
@@ -27,7 +26,6 @@ class VisitorsTest < ApplicationSystemTestCase
     visit visitors_url
     click_on "Edit", match: :first
 
-    fill_in "Company", with: @visitor.company
     fill_in "Cpf", with: @visitor.cpf
     fill_in "Name", with: @visitor.name
     click_on "Update Visitor"

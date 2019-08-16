@@ -1,0 +1,33 @@
+%p#notice= notice
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+  = link_to '[return]', residents_path
+%p
+  %b Name:
+  = @resident.name
+%p
+  %b Facility:
+  = link_to @resident.facility.name, @resident.facility
+
+%p
+  Appointments:
+  = @resident.appointments.count
+%p
+  - @resident.appointments.each do |appointment|
+    = appointment.description
+    with
+    = appointment.visitor.name
+    %br
+%p
+  Created by
+  = link_to @resident.created_by.name, @resident.created_by
+  at
+  = @resident.created_at
+  %br
+  - if @resident.updated?
+    Updated by
+    = link_to @resident.updated_by.name, @resident.updated_by
+    at
+    = @resident.updated_at
+%p= link_to 'Edit', edit_resident_path(@resident)

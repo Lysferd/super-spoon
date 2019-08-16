@@ -1,20 +1,26 @@
 %p#notice= notice
-%h1 Visitors
-%table
-  %thead
-    %tr
-      %th Cpf
-      %th Name
-      %th Company
-      %th{:colspan => "3"}
-  %tbody
+%sub
+  = link_to '[home]', root_path
+  = link_to '[dev]', dev_path
+
+%h1
+  Visitors
+  = link_to ?+, new_visitor_path
+
+- if @visitors.empty?
+  %p No data found!
+- else
+  %table
+    %th CPF
+    %th Name
+    %th{ colspan: 3 } Actions
     - @visitors.each do |visitor|
       %tr
         %td= visitor.cpf
         %td= visitor.name
-        %td= visitor.company
         %td= link_to 'Show', visitor
         %td= link_to 'Edit', edit_visitor_path(visitor)
-        %td= link_to 'Destroy', visitor, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Visitor', new_visitor_path
+        %td= link_to 'Destroy', visitor, method: :delete
+
+  Total:
+  = @visitors.count
