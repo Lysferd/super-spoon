@@ -1,7 +1,13 @@
 class HomeController < ApplicationController
+
   def index
     @facilities = Facility.all
-    @visitors = Visitor.all
+
+    if params[:purpose] == 'particular'
+      @visitors = Visitor.all
+    else
+      @visitors = Employee.all
+    end
 
     if !@facility
       @facility = Facility.find_by(id: params[:facility].to_i)
@@ -22,22 +28,25 @@ class HomeController < ApplicationController
       @appointment.date = DateTime.parse(params[:date] +'T'+ params[:time])
       @appointment.host_id = params[:host]
       @appointment.description = params[:description]
+      @appointment.professional = params[:purpose] == 'professional'
+      @appointment.visitor_type = @visitor.class.name
+
+      
       if @visitor.id
         @appointment.visitor_id = @visitor.id
       else
         @visitor.save
-	@appointment.visitor_id = @visitor.id
+	      @appointment.visitor_id = @visitor.id
       end
+
+      puts 'TESTING'
+      p @appointment
+
       if @appointment.save
         redirect_to(@appointment)
       else
-        redirect_to root_path
+        redirect_to root_path, alert: 'Failed'
       end
-    end
-  end
-  def next
-    respond_to do |format|
-      format.html
     end
   end
 
@@ -45,4 +54,5 @@ class HomeController < ApplicationController
     @facilities = Facility.all
     @companies = Company.all
   end
+
 end

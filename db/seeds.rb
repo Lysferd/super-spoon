@@ -16,7 +16,7 @@ dev = User::create name: 'dev', password: 'dev'
 puts 'Generating data...'
 
 # Create some DATA
-10.times do
+5.times do
   # Groups:
   f = Facility::create name: Faker::Company.unique.name, created_by_id: dev.id 
   puts f
@@ -24,7 +24,7 @@ puts 'Generating data...'
   puts c
   
   # Entities:
-  10.times do
+  5.times do
     r = Resident::create name: Faker::Name.unique.name, facility: f, created_by_id: dev.id
     puts r
     e = Employee::create name: Faker::Name.unique.name, cpf: CPF::factory, company: c, created_by_id: dev.id
@@ -33,7 +33,7 @@ puts 'Generating data...'
     puts v
   
     # Appointments:
-    10.times do
+    5.times do
       professional = Faker::Boolean.boolean
       visitor = professional ? e : v
       type = visitor.class.name

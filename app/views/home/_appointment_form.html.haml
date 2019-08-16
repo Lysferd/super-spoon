@@ -1,3 +1,5 @@
+#alert= alert
+
 %div{class: "container"}
   %form{method: "get"}
     %div{class: "row"}
@@ -5,7 +7,7 @@
         %label{for: "host"} Visitado:
       %div{class: "col-75"}
         %select{name: "host", required: true}
-          - @facility.hosts.each do |h|
+          - @facility.residents.each do |h|
             %option{value: h.id}= h.name
     %div{class: "container"}
       %div{class: "row"}
@@ -18,7 +20,9 @@
         %div{class: "col-25"}
           %label{for: "time"} Hora da visita:
         %div{class: "col-75"}
-          %input{type: "text", id: "my-timepicker", name: "time", required: true}
+          %input{type: "text", id: "my-timepicker", name: "time" }
+          %button{ onclick: "getTime('my-timepicker')" }
+            Hora Atual
       %div{class: "row"}
         %div{class: "col-25"}
           %label{for: "description"} Descrição:
@@ -29,5 +33,14 @@
       %input{type: "hidden", name: "purpose", value: params[:purpose]}
       %input{type: "hidden", name: "cpf", value: @visitor.cpf}
       %input{type: "hidden", name: "name", value: @visitor.name}
-      %input{type: "hidden", name: "company", value: @visitor.company}
+      - if params[:purpose] == 'profissional'
+        %input{type: "hidden", name: "company", value: @visitor.company}
       %input{type: "submit", value: "Avançar"}
+
+:javascript
+  function getTime(i) {
+    var d = new Date(),
+      h = (d.getHours()<10?'0':'') + d.getHours(),
+      m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+    document.getElementById(i).value = h + ':' + m;
+  }

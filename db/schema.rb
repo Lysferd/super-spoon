@@ -10,16 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_211054) do
+ActiveRecord::Schema.define(version: 7) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
     t.text "description"
     t.datetime "date"
-    t.integer "host_id"
+    t.boolean "professional"
+    t.bigint "host_id"
     t.string "visitor_type"
-    t.integer "visitor_id"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "visitor_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_appointments_on_created_by_id"
@@ -31,8 +35,8 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "cnpj"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_companies_on_created_by_id"
@@ -42,9 +46,9 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
   create_table "employees", force: :cascade do |t|
     t.string "cpf"
     t.string "name"
-    t.integer "company_id"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "company_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_employees_on_company_id"
@@ -54,8 +58,8 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
 
   create_table "facilities", force: :cascade do |t|
     t.string "name"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_facilities_on_created_by_id"
@@ -64,9 +68,9 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
 
   create_table "residents", force: :cascade do |t|
     t.string "name"
-    t.integer "facility_id"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "facility_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_residents_on_created_by_id"
@@ -85,12 +89,27 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
   create_table "visitors", force: :cascade do |t|
     t.string "name"
     t.string "cpf"
-    t.integer "created_by_id"
-    t.integer "updated_by_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_by_id"], name: "index_visitors_on_created_by_id"
     t.index ["updated_by_id"], name: "index_visitors_on_updated_by_id"
   end
 
+  add_foreign_key "appointments", "residents", column: "host_id"
+  add_foreign_key "appointments", "users", column: "created_by_id"
+  add_foreign_key "appointments", "users", column: "updated_by_id"
+  add_foreign_key "companies", "users", column: "created_by_id"
+  add_foreign_key "companies", "users", column: "updated_by_id"
+  add_foreign_key "employees", "companies"
+  add_foreign_key "employees", "users", column: "created_by_id"
+  add_foreign_key "employees", "users", column: "updated_by_id"
+  add_foreign_key "facilities", "users", column: "created_by_id"
+  add_foreign_key "facilities", "users", column: "updated_by_id"
+  add_foreign_key "residents", "facilities"
+  add_foreign_key "residents", "users", column: "created_by_id"
+  add_foreign_key "residents", "users", column: "updated_by_id"
+  add_foreign_key "visitors", "users", column: "created_by_id"
+  add_foreign_key "visitors", "users", column: "updated_by_id"
 end

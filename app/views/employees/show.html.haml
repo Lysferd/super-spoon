@@ -8,6 +8,16 @@
 %p
   %strong Company:
   = link_to @employee.company.name, @employee.company
+%p
+  %strong Last visits:
+  %br
+  - @employee.appointments.each do |a|
+    = a.description
+    with
+    = link_to a.host.name, a.host
+    at
+    = a.date
+    %br
 = link_to 'Edit', edit_employee_path(@employee)
 |
 = link_to 'Back', employees_path

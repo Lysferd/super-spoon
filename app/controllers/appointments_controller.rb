@@ -16,13 +16,13 @@ class AppointmentsController < ApplicationController
   def new
     @appointment = Appointment.new
     @residents = Resident.all
-    @employees = Employee.all
+    @visitors = Employee.all + Visitor.all
   end
 
   # GET /appointments/1/edit
   def edit
     @residents = Resident.all
-    @employees = Employee.all
+    @visitors = Employee.all + Visitor.all
   end
 
   # POST /appointments

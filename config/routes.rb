@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
 
-  resources :visitors
   root to: 'home#index'
   get 'dev' => 'home#dev'
 
-  resources :appointments
-  resources :employees
-  resources :residents
-  resources :users
+  get 'next' => 'home#next'
+
   resources :facilities
   resources :companies
+  resources :residents
+  resources :employees
+  resources :visitors
+  resources :appointments
+  resources :users
   resources :sessions, only: [ :new, :create, :destroy ]
   
   get 'signup', to: 'users#new', as: 'signup'

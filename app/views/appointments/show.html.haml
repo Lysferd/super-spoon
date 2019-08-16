@@ -8,6 +8,10 @@
 %p
   %strong Visitor:
   = link_to @appointment.visitor.name, @appointment.visitor
+
+%p
+  %strong Date
+  = @appointment.date
 = link_to 'Edit', edit_appointment_path(@appointment)
 |
 = link_to 'Back', appointments_path

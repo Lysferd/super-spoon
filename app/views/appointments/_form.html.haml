@@ -12,7 +12,7 @@
     = form.text_area :description
   .field
     = form.label :host_id
-    = form.collection_select :host_id, @hosts, :id, :name
+    = form.collection_select :host_id, @residents, :id, :name
   .field
     = form.label :visitor_id
     = form.collection_select :visitor_id, @visitors, :id, :name

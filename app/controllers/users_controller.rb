@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:new, :create], if: User.all.empty?
+  skip_before_action :authorize, only: [:new, :create]
+  before_action :authorize, unless: :users_check
 
+  public
   # GET /users
   # GET /users.json
   def index
@@ -72,4 +74,13 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :password_confirmation)
     end
+
+    def authorize
+      super
+    end
+
+    def users_check
+      return User.all.empty?
+    end
+
 end
