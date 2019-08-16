@@ -1,0 +1,26 @@
+%div{class: "container"}
+  %form{method: "get"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "name"} Nome:
+      %div{class: "col-75"}
+        - if @visitor
+          %input{type: "text", name: "name", required: true, value: @visitor.name, readonly: true, disabled: true, autofocus: true}
+          %input{type: "hidden", name: "name", value: @visitor.name}
+        - else
+          %input{type: "text", name: "name", required: true, autofocus: true}
+    - if params[:purpose] == "professional"
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "company"} Empresa:
+        %div{class: "col-75"}
+          - if @visitor
+            %input{type: "text", name: "company", required: true, value: @visitor.company, disabled: true}
+            %input{type: "hidden", name: "company", value: @visitor.company}
+          - else
+            %input{type: "text", name: "company", required: true}
+    %div{class: "row"}
+      %input{type: "hidden", name: "facility", value: @facility.id}
+      %input{type: "hidden", name: "purpose", value: params[:purpose]}
+      %input{type: "hidden", name: "cpf", value: params[:cpf]}
+      %input{type: "submit", value: "Avançar"}

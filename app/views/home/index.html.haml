@@ -1,2 +1,63 @@
-%h1 Home#index
-I am root.
+%sub= link_to '[home]', root_path
+  
+%div{class: "container"}
+  %form{method: "get"}
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "purpose"} Motivo de Visita:
+      %div{class: "col-75"}
+        %input{type: "radio", name: "purpose", id: "particular", value: "particular", required: true, checked: params[:purpose] == "particular"} Particular
+        %input{type: "radio", name: "purpose", id: "professional", value: "professional", required: true, checked: params[:purpose] == "professional"} Professional(Serviço)
+    %div{class: "row"}
+      %div{class: "col-25"}
+        %label{for: "facility"} Nova Visita para Local:
+      %div{class: "col-75"}
+        %select{name: "facility"}
+          - @facilities.each do |f|
+            %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
+    %div{class: "row"}
+      %input{type: "submit", value: "Avançar"}
+- if params[:facility] && params[:purpose] && !@visitor
+  %div{class: "container"}
+    %form{method: "get"}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "cpf"} CPF:
+        %div{class: "col-75"}
+          %input{type: "text", name: "cpf", maxlength: 11, placeholder: "12345678901", required: true, size: 11, autofocus: !params[:cpf], minlength: 11, max: 99999999999, value: params[:cpf]}
+      %div{class: "row"}
+        %input{type: "hidden", name: "facility", value: params[:facility]}
+        %input{type: "hidden", name: "purpose", value: params[:purpose]}
+        %input{type: "submit", value: "Buscar"}
+- if params[:facility] && params[:purpose] && params[:cpf]
+  %div=render 'visitor_form'
+- if @visitor && params[:name]
+  %div=render 'appointment_form'
+%div{class: "row"}
+//  %input{type: "text", id: "my-timepicker"}
+//  %input{type: "text", id: "my-timeinput", name: "time"}
+
+:javascript
+  $("#my-datepicker").datepicker({
+    language: "pt-BR",
+    startDate: "+0d",
+    endDate: "+1y"
+    });
+  $("#my-datepicker").on('changeDate', function () {
+    $("#my-input").val(
+      $("#my-datepicker").datepicker('getFormattedDate')
+      );
+  });
+
+:javascript
+  $("#my-timepicker").timepicker({
+    show2400: true,
+    timeFormat: "H:i",
+    forceRoundTime: true,
+    }
+  );
+//  $("#my-timepicker").on('changeDate', function () {
+//    $("#my-timeinput").val(
+//      $("my-timepicker").timepicker('getTime')
+//      );
+//  });

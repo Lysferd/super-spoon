@@ -14,8 +14,7 @@ ActiveRecord::Schema.define(version: 2019_08_09_211054) do
 
   create_table "appointments", force: :cascade do |t|
     t.text "description"
-    t.date "date"
-    t.boolean "professional"
+    t.datetime "date"
     t.integer "host_id"
     t.string "visitor_type"
     t.integer "visitor_id"

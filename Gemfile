@@ -31,6 +31,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'haml-rails'
 gem 'jquery_mask_rails'
+gem 'bootstrap-sass'
+gem 'bootstrap-datepicker-rails'
+gem 'jquery-rails'
+gem 'jquery-timepicker-rails'
 
 # Seeding helpers
 gem 'faker'
