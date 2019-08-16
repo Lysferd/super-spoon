@@ -12,8 +12,18 @@
         %div{class: "col-25"}
           %label{for: "date"} Data da Visita:
         %div{class: "col-75"}
-          %input{type: "hidden", id: "my-input", name: "date"}
+          %input{type: "hidden", id: "my-input", name: "date", required: true}
           %div{class: "testStyle", id: "my-datepicker"}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "time"} Hora da visita:
+        %div{class: "col-75"}
+          %input{type: "text", id: "my-timepicker", name: "time", required: true}
+      %div{class: "row"}
+        %div{class: "col-25"}
+          %label{for: "description"} Descrição:
+        %div{class: "col-75"}
+          %textarea{rows: "3", cols: "60", name: "description"}
     %div{class: "row"}
       %input{type: "hidden", name: "facility", value: params[:facility]}
       %input{type: "hidden", name: "purpose", value: params[:purpose]}
@@ -21,8 +31,3 @@
       %input{type: "hidden", name: "name", value: @visitor.name}
       %input{type: "hidden", name: "company", value: @visitor.company}
       %input{type: "submit", value: "Avançar"}
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "description"} Descrição:
-      %div{class: "col-75"}
-        %textarea{rows: "3", cols: "60", name: "description"}

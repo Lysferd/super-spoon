@@ -33,13 +33,31 @@
   %div=render 'visitor_form'
 - if @visitor && params[:name]
   %div=render 'appointment_form'
+%div{class: "row"}
+//  %input{type: "text", id: "my-timepicker"}
+//  %input{type: "text", id: "my-timeinput", name: "time"}
 
 :javascript
   $("#my-datepicker").datepicker({
-    language: "pt-BR"
+    language: "pt-BR",
+    startDate: "+0d",
+    endDate: "+1y"
     });
   $("#my-datepicker").on('changeDate', function () {
     $("#my-input").val(
       $("#my-datepicker").datepicker('getFormattedDate')
       );
   });
+
+:javascript
+  $("#my-timepicker").timepicker({
+    show2400: true,
+    timeFormat: "H:i",
+    forceRoundTime: true,
+    }
+  );
+//  $("#my-timepicker").on('changeDate', function () {
+//    $("#my-timeinput").val(
+//      $("my-timepicker").timepicker('getTime')
+//      );
+//  });

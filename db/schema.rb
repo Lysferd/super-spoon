@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2019_07_16_183733) do
 
   create_table "appointments", force: :cascade do |t|
     t.text "description"
-    t.date "date"
+    t.datetime "date"
     t.integer "host_id"
     t.integer "visitor_id"
     t.integer "created_by_id"

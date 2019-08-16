@@ -7,7 +7,8 @@
   %th Description
   %th Host
   %th Visitor
-  %th Date
+  %th Date(created)
+  %th Date(2)
   %tbody
     - @appointments.each do |appointment|
       %tr
@@ -15,5 +16,6 @@
         %td= link_to appointment.host.name, appointment.host
         %td= link_to appointment.visitor.name, appointment.visitor
         %td= appointment.created_at
+        %td= appointment.date
 %br/
 = link_to 'New Appointment', new_appointment_path

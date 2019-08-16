@@ -32,6 +32,8 @@ gem 'jquery_mask_rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
+gem 'jquery-timepicker-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

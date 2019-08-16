@@ -19,7 +19,7 @@ class HomeController < ApplicationController
     end
 
     if @visitor && @appointment && params[:date] && params[:host]
-      @appointment.date = params[:date]
+      @appointment.date = DateTime.parse(params[:date] +'T'+ params[:time])
       @appointment.host_id = params[:host]
       @appointment.description = params[:description]
       if @visitor.id
