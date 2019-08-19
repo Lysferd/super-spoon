@@ -7,44 +7,26 @@
       .row
         .col-25= label_tag :date, 'Data da Visita:'
         .col-75
-          = hidden_field_tag :date, '', id: "my-input", required: true
-          .testStyle{id: "my-datepicker"}
+          .col-50
+            = hidden_field_tag :date, '', id: "my-input", required: true
+            .testStyle{id: "my-datepicker"}
+        
+              //        .col-25= label_tag :time, 'Hora da Visita'
+
+          .col-25R
+            = text_field_tag :time, '', id: "my-timepicker", required: true
+            = button_tag 'Hora Atual', type: :button, onclick: "getTime('my-timepicker')"
       .row
-        .col-25= label_tag :time, 'Hora da Visita'
-%div{class: "container"}
-  %form{method: "get"}
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "host"} Visitado:
-      %div{class: "col-75"}
-        %select{name: "host", required: true}
-          - @facility.residents.each do |h|
-            %option{value: h.id}= h.name
-    %div{class: "container"}
-      %div{class: "row"}
-        %div{class: "col-25"}
-          %label{for: "date"} Data da Visita:
-        %div{class: "col-75"}
-      %div{class: "row"}
-        %div{class: "col-25"}
-          %label{for: "time"} Hora da visita:
-        %div{class: "col-75"}
-          %input{type: "text", id: "my-timepicker", name: "time" }
-          %button{type: "button",  onclick: "getTime('my-timepicker')" }
-            Hora Atual
-      %div{class: "row"}
-        %div{class: "col-25"}
-          %label{for: "description"} Descrição:
-        %div{class: "col-75"}
-          %textarea{rows: "3", cols: "60", name: "description"}
-    %div{class: "row"}
-      %input{type: "hidden", name: "facility", value: params[:facility]}
-      %input{type: "hidden", name: "purpose", value: params[:purpose]}
-      %input{type: "hidden", name: "cpf", value: @visitor.cpf}
-      %input{type: "hidden", name: "name", value: @visitor.name}
+        .col-25= label_tag :description, 'Descrição:'
+        .col-75= text_area_tag :description, '', rows: "3", cols: "60"
+    .row
+      = hidden_field_tag :facility, params[:facility]
+      = hidden_field_tag :purpose, params[:purpose]
+      = hidden_field_tag :cpf, @visitor.cpf
+      = hidden_field_tag :name, @visitor.name
       - if params[:purpose] == 'profissional'
-        %input{type: "hidden", name: "company", value: @visitor.company}
-      %input{type: "submit", value: "Avançar"}
+        = hidden_field_tag :company, @visitor.company
+      = submit_tag 'Avançar'
 
 :javascript
   function getTime(i) {

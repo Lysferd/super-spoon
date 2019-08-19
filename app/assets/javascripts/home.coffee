@@ -11,6 +11,7 @@ $ ->
     language: "pt-BR",
     startDate: "+0d",
     endDate: "+1y"
+    todayBtn: "linked"
     })
 
   $("#my-datepicker").on('changeDate', ->
