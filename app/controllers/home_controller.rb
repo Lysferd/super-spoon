@@ -1,6 +1,14 @@
+require 'cpf_gen'
+
 class HomeController < ApplicationController
 
   def index
+
+    if params[:cpf]
+      p CPF::verify params[:cpf]
+    end
+
+
     @facilities = Facility.all
 
     if params[:purpose] == 'particular'
@@ -13,10 +21,24 @@ class HomeController < ApplicationController
       @facility = Facility.find_by(id: params[:facility].to_i)
     end
 
-    if !@visitor
-      @visitor = Visitor.find_by(cpf: params[:cpf])
+    if !@visitor and params[:cpf]
+      unless CPF::verify params[:cpf]
+        #render js: "alert('CPF Inválido');"
+      end
+
+      if params[:purpose] == 'particular'
+        @visitor = Visitor.find_by( cpf: params[:cpf] )
+      else
+        @visitor = Employee.find_by(cpf: params[:cpf])
+      end
+
       if !@visitor && params[:name]
-        @visitor = Visitor.new(cpf: params[:cpf], name: params[:name], company: params[:company])
+        if params[:purpose] == 'particular'
+          @visitor = Visitor.new(cpf: params[:cpf], name: params[:name])
+        else
+          @visitor = Empoyee.new(cpf: params[:cpf], name: params[:name],
+                                 company: params[:company])
+        end
       end
     end
 
@@ -39,13 +61,10 @@ class HomeController < ApplicationController
 	      @appointment.visitor_id = @visitor.id
       end
 
-      puts 'TESTING'
-      p @appointment
-
       if @appointment.save
         redirect_to(@appointment)
       else
-        redirect_to root_path, alert: 'Failed'
+        redirect_to root_path
       end
     end
   end

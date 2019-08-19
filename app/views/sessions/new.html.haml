@@ -1,15 +1,14 @@
 %p#alert= alert
 %p#notice= notice
-%h1 Login
-#bordered
-  = form_tag sessions_path do |f|
-    .field
-      = label_tag :name
-      = text_field_tag :name
 
-    .field
-      = label_tag :password
-      = password_field_tag :password
+.small-container
+  = form_with url: sessions_path do
+    .row
+      .col-25= label_tag :name, 'Usuário'
+      .col-75= text_field_tag :name
 
-    .actions
-      = submit_tag 'Login', disable_with: 'Logging in...'
+    .row
+      .col-25= label_tag :password, 'Senha'
+      .col-75= password_field_tag :password
+
+    .row= submit_tag 'Login', disable_with: 'Processando...'

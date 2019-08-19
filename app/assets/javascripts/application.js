@@ -16,6 +16,6 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require bootstrap-datepicker
 //= require jquery.timepicker.js
+//= require_tree .

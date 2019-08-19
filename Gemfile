@@ -29,11 +29,12 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# HAML and JQuery gems
 gem 'haml-rails'
-gem 'jquery_mask_rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
+gem 'jquery_mask_rails'
 gem 'jquery-timepicker-rails'
 
 # Seeding helpers

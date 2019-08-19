@@ -1,31 +1,39 @@
-%sub= link_to '[home]', root_path
+.container#menu
+  = link_to 'Nova Visita', root_path
+  |
+  = link_to 'Histórico', root_path
+  |
+  = link_to 'Logout', logout_path
   
-%div{class: "container"}
+.container
   %form{method: "get"}
     %div{class: "row"}
       %div{class: "col-25"}
         %label{for: "purpose"} Motivo de Visita:
       %div{class: "col-75"}
         %input{type: "radio", name: "purpose", id: "particular", value: "particular", required: true, checked: params[:purpose] == "particular"} Particular
-        %input{type: "radio", name: "purpose", id: "professional", value: "professional", required: true, checked: params[:purpose] == "professional"} Professional(Serviço)
+        %input{type: "radio", name: "purpose", id: "professional", value: "professional", required: true, checked: params[:purpose] == "professional"} Professional (Serviço)
     %div{class: "row"}
       %div{class: "col-25"}
-        %label{for: "facility"} Nova Visita para Local:
+        %label{for: "facility"} Localidade:
       %div{class: "col-75"}
         %select{name: "facility"}
           - @facilities.each do |f|
             %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
+
+// Move to partial:
 - if params[:facility] && params[:purpose] && !@visitor
-  %div{class: "container"}
+  .container
+    /- form_with method: :get do
     %form{method: "get"}
-      %div{class: "row"}
-        %div{class: "col-25"}
+      .row
+        .col-25
           %label{for: "cpf"} CPF:
-        %div{class: "col-75"}
-          %input{type: "text", name: "cpf", maxlength: 14, placeholder: "111.111.111-11", required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf]}
-      %div{class: "row"}
+        .col-75
+          %input{type: "text", name: "cpf", maxlength: 14, placeholder: "999.999.999-99", required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf]}
+      .row
         %input{type: "hidden", name: "facility", value: params[:facility]}
         %input{type: "hidden", name: "purpose", value: params[:purpose]}
         %input{type: "submit", value: "Buscar"}
