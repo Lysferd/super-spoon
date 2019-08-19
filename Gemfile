@@ -34,7 +34,6 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
-gem 'jquery-inputmask-rails'
 gem 'jquery-timepicker-rails'
 
 # Seeding helpers

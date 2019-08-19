@@ -1,13 +1,12 @@
 .container
-  /- form_with method: :get do
-  %form{method: "get"}
+  = form_with method: :get do
     .row
       .col-25
         = label_tag :cpf, 'CPF:'
       .col-75
-        = text_field_tag :cpf, '', data: { inputmask: '999' }
-        /%input{type: "text", name: "cpf", maxlength: 14, required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf] }
+        = text_field_tag :cpf, '', required: true, data: { inputmask: "'alias': 'ip'" }
     .row
-      %input{type: "hidden", name: "facility", value: params[:facility]}
-      %input{type: "hidden", name: "purpose", value: params[:purpose]}
-      %input{type: "submit", value: "Buscar"}
+      = hidden_field_tag :facility, params[:facility]
+      = hidden_field_tag :purpose, params[:purpose]
+      = submit_tag 'Validar', disable_with: 'Validando...'
+

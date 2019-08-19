@@ -2,9 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
+$ ->
   # CPF Mask (tentative)
-  $('#cpf').inputmask("999.999.999-99")
+  $(':input').inputmask()
 
   # DatePicker
   $("#my-datepicker").datepicker({
@@ -12,6 +12,7 @@ $(document).ready ->
     startDate: "+0d",
     endDate: "+1y"
     })
+
   $("#my-datepicker").on('changeDate', ->
     $("#my-input").val(
       $("#my-datepicker").datepicker('getFormattedDate')
