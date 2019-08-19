@@ -5,9 +5,8 @@ class HomeController < ApplicationController
   def index
 
     if params[:cpf]
-      p CPF::verify params[:cpf]
+      @valid_cpf = CPF::verify params[:cpf]
     end
-
 
     @facilities = Facility.all
 
@@ -21,11 +20,7 @@ class HomeController < ApplicationController
       @facility = Facility.find_by(id: params[:facility].to_i)
     end
 
-    if !@visitor and params[:cpf]
-      unless CPF::verify params[:cpf]
-        #render js: "alert('CPF Inválido');"
-      end
-
+    if !@visitor and @valid_cpf
       if params[:purpose] == 'particular'
         @visitor = Visitor.find_by( cpf: params[:cpf] )
       else

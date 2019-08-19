@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require rails-ujs
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.js
+//= require jquery.timepicker.js
+//= require jquery.inputmask
+//= require jquery.inputmask.extensions
+//= require jquery.inputmask.numeric.extensions
+//= require jquery.inputmask.date.extensions
 //= require activestorage
 //= require turbolinks
-//= require bootstrap-datepicker
-//= require jquery.timepicker.js
 //= require_tree .

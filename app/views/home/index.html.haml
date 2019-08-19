@@ -32,7 +32,8 @@
         .col-25
           %label{for: "cpf"} CPF:
         .col-75
-          %input{type: "text", name: "cpf", maxlength: 14, placeholder: "999.999.999-99", required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf]}
+          = text_field_tag :cpf, '', data: { inputmask: '999' }
+          /%input{type: "text", name: "cpf", maxlength: 14, required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf] }
       .row
         %input{type: "hidden", name: "facility", value: params[:facility]}
         %input{type: "hidden", name: "purpose", value: params[:purpose]}
