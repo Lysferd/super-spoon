@@ -10,17 +10,19 @@
         - else
           %input{type: "text", name: "name", required: true, autofocus: true}
     - if params[:purpose] == "professional"
-      %div{class: "row"}
-        %div{class: "col-25"}
-          %label{for: "company"} Empresa:
-        %div{class: "col-75"}
+      .row
+        .col-25= label_tag :cpf, 'CPF:'
+        .col-75= text_field_tag :cpf, @visitor.cpf, disabled: true
+      .row
+        .col-25= label_tag :company, 'Empresa:'
+        .col-75
           - if @visitor
-            %input{type: "text", name: "company", required: true, value: @visitor.company, disabled: true}
-            %input{type: "hidden", name: "company", value: @visitor.company}
+            = text_field_tag :company, @visitor.company.name, disabled: true
           - else
-            %input{type: "text", name: "company", required: true}
-    %div{class: "row"}
+            = text_field_tag :company, required: true
+    .row
       %input{type: "hidden", name: "facility", value: @facility.id}
       %input{type: "hidden", name: "purpose", value: params[:purpose]}
       %input{type: "hidden", name: "cpf", value: params[:cpf]}
+      %input{type: "hidden", name: "company", value: @visitor.company.name}
       %input{type: "submit", value: "Avançar"}

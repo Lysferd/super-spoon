@@ -3,4 +3,24 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+  # CPF Mask (tentative)
   $('#cpf').inputmask("999.999.999-99")
+
+  # DatePicker
+  $("#my-datepicker").datepicker({
+    language: "pt-BR",
+    startDate: "+0d",
+    endDate: "+1y"
+    })
+  $("#my-datepicker").on('changeDate', ->
+    $("#my-input").val(
+      $("#my-datepicker").datepicker('getFormattedDate')
+    )
+  )
+
+  # TimePicker
+  $("#my-timepicker").timepicker({
+    show2400: true,
+    timeFormat: "H:i",
+    forceRoundTime: true
+  })

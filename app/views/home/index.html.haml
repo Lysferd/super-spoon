@@ -5,6 +5,9 @@
   |
   = link_to 'Logout', logout_path
   
+#alert= alert
+#notice= notice
+
 .container
   %form{method: "get"}
     %div{class: "row"}
@@ -23,50 +26,15 @@
     %div{class: "row"}
       %input{type: "submit", value: "Avançar"}
 
-// Move to partial:
-- if params[:facility] && params[:purpose] && !@visitor
-  .container
-    /- form_with method: :get do
-    %form{method: "get"}
-      .row
-        .col-25
-          %label{for: "cpf"} CPF:
-        .col-75
-          = text_field_tag :cpf, '', data: { inputmask: '999' }
-          /%input{type: "text", name: "cpf", maxlength: 14, required: true, autofocus: !params[:cpf], minlength: 14, value: params[:cpf] }
-      .row
-        %input{type: "hidden", name: "facility", value: params[:facility]}
-        %input{type: "hidden", name: "purpose", value: params[:purpose]}
-        %input{type: "submit", value: "Buscar"}
-- if params[:facility] && params[:purpose] && params[:cpf]
-  %div=render 'visitor_form'
-- if @visitor && params[:name]
-  %div=render 'appointment_form'
-%div{class: "row"}
-//  %input{type: "text", id: "my-timepicker"}
-//  %input{type: "text", id: "my-timeinput", name: "time"}
+// CPF Validator Form
+- if params[:facility] and params[:purpose] and not @visitor
+  = render 'cpf_validator'
 
-:javascript
-  $("#my-datepicker").datepicker({
-    language: "pt-BR",
-    startDate: "+0d",
-    endDate: "+1y"
-    });
-  $("#my-datepicker").on('changeDate', function () {
-    $("#my-input").val(
-      $("#my-datepicker").datepicker('getFormattedDate')
-      );
-  });
+// Visitor/Employee Form
+- if params[:facility] and params[:purpose] and params[:cpf]
+  = render 'visitor_form'
 
-:javascript
-  $("#my-timepicker").timepicker({
-    show2400: true,
-    timeFormat: "H:i",
-    forceRoundTime: true,
-    }
-  );
-//  $("#my-timepicker").on('changeDate', function () {
-//    $("#my-timeinput").val(
-//      $("my-timepicker").timepicker('getTime')
-//      );
-//  });
+// Appointment Form
+- if @visitor and params[:name]
+  = render 'appointment_form'
+
