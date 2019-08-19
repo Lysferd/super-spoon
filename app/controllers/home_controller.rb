@@ -4,10 +4,6 @@ class HomeController < ApplicationController
 
   def index
 
-    if params[:cpf]
-      @valid_cpf = CPF::verify params[:cpf]
-    end
-
     @facilities = Facility.all
 
     if params[:purpose] == 'particular'
@@ -31,8 +27,8 @@ class HomeController < ApplicationController
         if params[:purpose] == 'particular'
           @visitor = Visitor.new(cpf: params[:cpf], name: params[:name])
         else
-          @visitor = Empoyee.new(cpf: params[:cpf], name: params[:name],
-                                 company: params[:company])
+          @visitor = Employee.new(cpf: params[:cpf], name: params[:name],
+                                  company: params[:company])
         end
       end
     end

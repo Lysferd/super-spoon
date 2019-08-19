@@ -1,5 +1,5 @@
 .container
-  = form_with method: :get do
+  = form_with method: :get, local: true do
     .row
       .col-25= label_tag :host, 'Visitado'
       .col-75b= select_tag :host, options_for_select(@facility.residents.collect{ |h| [h.name, h.id]})

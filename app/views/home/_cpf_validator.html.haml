@@ -1,5 +1,5 @@
 .container
-  = form_with do
+  = form_with method: :get, local: true do
     .row
       .col-25
         = label_tag :cpf, 'CPF:'
@@ -8,5 +8,5 @@
     .row
       = hidden_field_tag :facility, params[:facility]
       = hidden_field_tag :purpose, params[:purpose]
-      = submit_tag 'Validar', disable_with: 'Validando...'
+      = submit_tag 'Validar'
 
