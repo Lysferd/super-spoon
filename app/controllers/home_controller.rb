@@ -20,7 +20,7 @@ class HomeController < ApplicationController
       @facility = Facility.find_by(id: params[:facility].to_i)
     end
 
-    if !@visitor and @valid_cpf
+    if !@visitor #and @valid_cpf
       if params[:purpose] == 'particular'
         @visitor = Visitor.find_by( cpf: params[:cpf] )
       else

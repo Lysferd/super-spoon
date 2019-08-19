@@ -27,7 +27,7 @@
       %input{type: "submit", value: "Avançar"}
 
 // CPF Validator Form
-- if params[:facility] and params[:purpose] and not @visitor
+- if params[:facility] and params[:purpose] and not @visitor and not params[:cpf]
   = render 'cpf_validator'
 
 // Visitor/Employee Form
@@ -35,6 +35,6 @@
   = render 'visitor_form'
 
 // Appointment Form
-- if @visitor and params[:name]
+- if @visitor
   = render 'appointment_form'
 

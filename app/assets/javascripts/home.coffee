@@ -4,7 +4,7 @@
 
 $ ->
   # CPF Mask (tentative)
-  $(':input').inputmask()
+  $('#cpf').inputmask()
 
   # DatePicker
   $("#my-datepicker").datepicker({

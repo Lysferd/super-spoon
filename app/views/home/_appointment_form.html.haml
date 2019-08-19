@@ -1,4 +1,16 @@
-
+.container
+  = form_with method: :get do
+    .row
+      .col-25= label_tag :host, 'Visitado'
+      .col-75b= select_tag :host, options_for_select(@facility.residents.collect{ |h| [h.name, h.id]})
+    .container
+      .row
+        .col-25= label_tag :date, 'Data da Visita:'
+        .col-75
+          = hidden_field_tag :date, '', id: "my-input", required: true
+          .testStyle{id: "my-datepicker"}
+      .row
+        .col-25= label_tag :time, 'Hora da Visita'
 %div{class: "container"}
   %form{method: "get"}
     %div{class: "row"}
@@ -13,14 +25,12 @@
         %div{class: "col-25"}
           %label{for: "date"} Data da Visita:
         %div{class: "col-75"}
-          %input{type: "hidden", id: "my-input", name: "date", required: true}
-          %div{class: "testStyle", id: "my-datepicker"}
       %div{class: "row"}
         %div{class: "col-25"}
           %label{for: "time"} Hora da visita:
         %div{class: "col-75"}
           %input{type: "text", id: "my-timepicker", name: "time" }
-          %button{ onclick: "getTime('my-timepicker')" }
+          %button{type: "button",  onclick: "getTime('my-timepicker')" }
             Hora Atual
       %div{class: "row"}
         %div{class: "col-25"}

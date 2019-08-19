@@ -1,10 +1,10 @@
 .container
-  = form_with method: :get do
+  = form_with do
     .row
       .col-25
         = label_tag :cpf, 'CPF:'
       .col-75
-        = text_field_tag :cpf, '', required: true, data: { inputmask: "'alias': 'ip'" }
+        = text_field_tag :cpf, '', required: true, data: { inputmask: "'mask': '999.999.999-99'" }
     .row
       = hidden_field_tag :facility, params[:facility]
       = hidden_field_tag :purpose, params[:purpose]

@@ -1,28 +1,32 @@
-%div{class: "container"}
-  %form{method: "get"}
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "name"} Nome:
-      %div{class: "col-75"}
+.container
+  = form_with method: :get do
+    .row
+      .col-25= label_tag :cpf, 'CPF:'
+      .col-75
         - if @visitor
-          %input{type: "text", name: "name", required: true, value: @visitor.name, readonly: true, disabled: true, autofocus: true}
-          %input{type: "hidden", name: "name", value: @visitor.name}
+          = text_field_tag :cpf, @visitor.cpf, disabled: true
+          = hidden_field_tag :cpf, params[:cpf]
         - else
-          %input{type: "text", name: "name", required: true, autofocus: true}
+          = text_field_tag :cpf, params[:cpf], data: { inputmask: '999' }
+    .row
+      .col-25= label_tag :name, 'Nome:'
+      .col-75
+        - if @visitor
+          = text_field_tag :name, @visitor.name, disabled: true
+          = hidden_field_tag :name, @visitor.name
+        - else
+          = text_field_tag :name, '',required: true, autofocus: true
     - if params[:purpose] == "professional"
-      .row
-        .col-25= label_tag :cpf, 'CPF:'
-        .col-75= text_field_tag :cpf, @visitor.cpf, disabled: true
       .row
         .col-25= label_tag :company, 'Empresa:'
         .col-75
           - if @visitor
             = text_field_tag :company, @visitor.company.name, disabled: true
+            = hidden_field_tag :company, @visitor.company.name
           - else
-            = text_field_tag :company, required: true
+            = text_field_tag :company, '', required: true
     .row
-      %input{type: "hidden", name: "facility", value: @facility.id}
-      %input{type: "hidden", name: "purpose", value: params[:purpose]}
-      %input{type: "hidden", name: "cpf", value: params[:cpf]}
-      %input{type: "hidden", name: "company", value: @visitor.company.name}
-      %input{type: "submit", value: "Avançar"}
+      = hidden_field_tag :facility, @facility.id
+      = hidden_field_tag :purpose, params[:purpose]
+      - if !@visitor
+        = submit_tag "Avançar"
