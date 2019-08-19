@@ -1,12 +1,15 @@
 .container
   = form_with method: :get, local: true do
     .row
+      - if @valid_cpf == false
+        CPF Inválido! Insira novamente:
+    .row
       .col-25
         = label_tag :cpf, 'CPF:'
       .col-75
-        = text_field_tag :cpf, '', required: true, data: { inputmask: "'mask': '999.999.999-99'" }
+        = text_field_tag :cpf, params[:cpf], required: true, data: { inputmask: "'mask': '999.999.999-99'" }
     .row
-      = hidden_field_tag :facility, params[:facility]
+      = hidden_field_tag :facility_id, params[:facility_id]
       = hidden_field_tag :purpose, params[:purpose]
       = submit_tag 'Validar'
 

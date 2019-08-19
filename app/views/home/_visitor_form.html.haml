@@ -7,7 +7,7 @@
           = text_field_tag :cpf, @visitor.cpf, disabled: true
           = hidden_field_tag :cpf, params[:cpf]
         - else
-          = text_field_tag :cpf, params[:cpf], data: { inputmask: '999' }
+          = text_field_tag :cpf, params[:cpf], data: { inputmask: "'mask:' '999.999.999-99'" }
     .row
       .col-25= label_tag :name, 'Nome:'
       .col-75
@@ -24,9 +24,9 @@
             = text_field_tag :company, @visitor.company.name, disabled: true
             = hidden_field_tag :company, @visitor.company.name
           - else
-            = text_field_tag :company, '', required: true
+            = collection_select :company, :id, Company::all, :id, :name, required: true, prompt: true
     .row
-      = hidden_field_tag :facility, @facility.id
+      = hidden_field_tag :facility_id, params[:facility_id]
       = hidden_field_tag :purpose, params[:purpose]
       - if !@visitor
         = submit_tag "Avançar"

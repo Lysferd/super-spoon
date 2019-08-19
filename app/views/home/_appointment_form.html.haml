@@ -18,14 +18,14 @@
             = button_tag 'Hora Atual', type: :button, onclick: "getTime('my-timepicker')"
       .row
         .col-25= label_tag :description, 'Descrição:'
-        .col-75= text_area_tag :description, '', rows: "3", cols: "60"
+        .col-75= text_area_tag :description, '', rows: "3", cols: "60", required: true
     .row
-      = hidden_field_tag :facility, params[:facility]
+      = hidden_field_tag :facility_id, params[:facility_id]
       = hidden_field_tag :purpose, params[:purpose]
       = hidden_field_tag :cpf, @visitor.cpf
       = hidden_field_tag :name, @visitor.name
-      - if params[:purpose] == 'profissional'
-        = hidden_field_tag :company, @visitor.company
+      - if params[:purpose] == 'professional'
+        = hidden_field_tag :company_id, params[:company_id]
       = submit_tag 'Avançar'
 
 :javascript

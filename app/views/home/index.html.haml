@@ -9,29 +9,29 @@
 #notice= notice
 
 .container
-  %form{method: "get"}
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "purpose"} Motivo de Visita:
-      %div{class: "col-75"}
-        %input{type: "radio", name: "purpose", id: "particular", value: "particular", required: true, checked: params[:purpose] == "particular"} Particular
-        %input{type: "radio", name: "purpose", id: "professional", value: "professional", required: true, checked: params[:purpose] == "professional"} Professional (Serviço)
-    %div{class: "row"}
-      %div{class: "col-25"}
-        %label{for: "facility"} Localidade:
-      %div{class: "col-75"}
-        %select{name: "facility"}
-          - @facilities.each do |f|
-            %option{selected: params[:facility].to_i == f.id, value: f.id }= f.name
-    %div{class: "row"}
-      %input{type: "submit", value: "Avançar"}
+  = form_with method: :get, local: true do
+    .row
+      .col-25
+        = label_tag :purpose, 'Motivo da Visita:'
+      .col-75
+        = radio_button_tag :purpose, 'particular', params[:purpose] == 'particular', required: true
+        Particular
+        = radio_button_tag :purpose, 'professional', params[:purpose] == 'professional', required: true
+        Profissional (Serviço)
+    .row
+      .col-25
+        = label_tag :facility, 'Localidade:'
+      .col-75
+        = collection_select :facility, :id, Facility::all, :id, :name, required: true, prompt: true
+    .row
+      = submit_tag 'Avançar'
 
 // CPF Validator Form
-- if params[:facility] and params[:purpose] and not @visitor and not params[:cpf]
+- if params[:facility_id] and params[:purpose] and not @visitor and (not params[:cpf] or not @valid_cpf)
   = render 'cpf_validator'
 
 // Visitor/Employee Form
-- if params[:facility] and params[:purpose] and params[:cpf]
+- if params[:facility_id] and params[:purpose] and params[:cpf] and @valid_cpf
   = render 'visitor_form'
 
 // Appointment Form
