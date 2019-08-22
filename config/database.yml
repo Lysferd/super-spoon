@@ -16,5 +16,5 @@ production:
   <<: *default
   database: heliodor_production
   url: <%= ENV['DATABASE_URL'] %>
-  username: heliodor
+  username: <%= ENV['HELIODOR_DATABASE_USERNAME' ] %>
   password: <%= ENV['HELIODOR_DATABASE_PASSWORD'] %>
