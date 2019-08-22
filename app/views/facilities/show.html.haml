@@ -1,30 +1,30 @@
 %p#notice= notice
 
-%sub
-  = link_to '[home]', root_path
-  = link_to '[dev]', dev_path
-  = link_to '[return]', facilities_path
+.container
+  %h1
+    = @facility.name
+  .row
+    .col-25
+      Moradores:
+    .col-75
+      - if @facility.residents.empty?
+        Nenhum
+      - else
+        - @facility.residents.each do |resident|
+          = link_to resident.name, resident
+          %br/
 
-%p
-  %b Name:
-  = @facility.name
-%p
-  %b Hosts:
-  - if @facility.residents.empty?
-    None
-  - else
-    - @facility.residents.each do |resident|
-      = link_to resident.name, resident
-
-%p
-  Created by
-  = link_to @facility.created_by.name, @facility.created_by
-  at
-  = @facility.created_at
-  %br
-  - if @facility.updated?
-    Updated by
-    = link_to @facility.updated_by.name, @facility.updated_by
-    at
-    = @facility.updated_at
-%p= link_to 'Edit', edit_facility_path(@facility)
+  %p
+    Criado por
+    = link_to @facility.created_by.name, @facility.created_by
+    em
+    = @facility.created_at
+    %br
+    - if @facility.updated?
+      Atualizado por
+      = link_to @facility.updated_by.name, @facility.updated_by
+      em
+      = @facility.updated_at
+  %p
+    = link_to 'Editar', edit_facility_path(@facility)
+    = link_to 'Apagar', @facility, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

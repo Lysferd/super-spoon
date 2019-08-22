@@ -1,31 +1,25 @@
 %p#notice= notice
-%sub
-  = link_to '[home]', root_path
-  = link_to '[dev]', dev_path
 
 %h1
-  Facilities
+  Prédios
   = link_to ?+, new_facility_path
 
 - if @facilities.empty?
-  %p No data found!
+  %p Nada encontrado.
 - else
-  %table
-    %th Name
-    %th Residents [Hosts]
-    %th{ colspan: 3 } Actions
-    - @facilities.each do |facility|
-      %tr
-        %td= link_to facility.name, facility
-        - if facility.residents.empty?
-          %td (empty)
-        - else
-          %td
-            - facility.residents.each do |resident|
-              = link_to resident.name, resident
-        %td= link_to 'Show', facility
-        %td= link_to 'Edit', edit_facility_path(facility)
-        %td= link_to 'Delete', facility, method: :delete
+  .container
+    %table
+      %th Nome
+      %th Moradores
+      - @facilities.each do |facility|
+        %tr
+          %td= link_to facility.name, facility
+          - if facility.residents.empty?
+            %td (empty)
+          - else
+            %td
+              - facility.residents.each do |resident|
+                = link_to resident.name, resident
 
   Total:
   = @facilities.count
