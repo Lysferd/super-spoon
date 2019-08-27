@@ -8,28 +8,31 @@
       Prédio:
     .col-75
       = link_to @resident.facility.name, @resident.facility
-
   .row
     .col-25
       Visitas:
     .col-75
       - if @resident.appointments.empty?
         Nenhuma Visita
+      - else
+        - @resident.appointments.each do |appointment|
+          = link_to appointment.description, appointment
+          com
+          = link_to appointment.visitor.name, appointment.visitor
+          em
+          = appointment.date
+          %br/
   %p
-    - @resident.appointments.each do |appointment|
-      = appointment.description
-      with
-      = appointment.visitor.name
-      %br
-  %p
-    Created by
+    Criado por
     = link_to @resident.created_by.name, @resident.created_by
-    at
+    em
     = @resident.created_at
     %br
     - if @resident.updated?
-      Updated by
+      Atualizado por
       = link_to @resident.updated_by.name, @resident.updated_by
-      at
+      em
       = @resident.updated_at
-  %p= link_to 'Edit', edit_resident_path(@resident)
+  %p
+    = link_to 'Editar', edit_resident_path(@resident)
+    = link_to 'Apagar', @resident, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

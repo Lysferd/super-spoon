@@ -1,17 +1,34 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @company.name
-%p
-  %b Cnpj:
-  = @company.cnpj
-
-%p
-  Employees:
-  - @company.employees.each do |employee|
-    = link_to employee.name, employee
-
-= link_to 'Edit', edit_company_path(@company)
-\|
-= link_to 'Back', companies_path
+.container
+  %h1
+    = @company.name
+  .row
+    .col-25
+      Cnpj:
+    .col-75
+      = @company.cnpj
+  .row
+    .col-25
+      Funcionários:
+    .col-75
+      - if @company.employees.empty?
+        Nenhum
+      - else
+        - @company.employees.each do |employee|
+          = link_to employee.name, employee
+          %br/
+  %p
+    Criado por
+    = link_to @company.created_by.name, @company.created_by
+    em
+    = @company.created_at
+    %br
+    - if @company.updated?
+      Atualizado por
+      = link_to @company.updated_by.name, @company.updated_by
+      em
+      = @company.updated_at
+  %p
+    = link_to 'Editar', edit_company_path(@company)
+    = link_to 'Apagar', @company, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

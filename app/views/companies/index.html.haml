@@ -1,34 +1,26 @@
 %p#notice= notice
-%sub
-  = link_to '[home]', root_path
-  = link_to '[dev]', dev_path
 
 %h1
-  Companies
+  Empresas
   = link_to ?+, new_company_path
 
 - if @companies.empty?
-  %p No data found!
+  %p Nada encontrado.
 - else
-  %table
-    %tr
+  .container
+    %table
+      %th Nome
       %th CNPJ
-      %th Name
-      %th Employees [Visitors]
-      %th{ colspan: 3 } Actions
-
-    - @companies.each do |company|
-      %tr
-        %td= company.cnpj
-        %td= company.name
-        %td
+      %th Funcionários
+      - @companies.each do |company|
+        %tr
+          %td= link_to company.name, company
+          %td= company.cnpj
           - if company.employees.empty?
-            (empty)
+            %td (Vazio)
           - else
-            - company.employees.each do |employee|
-              = link_to employee.name, employee
-        %td= link_to 'Show', company
-        %td= link_to 'Edit', edit_company_path(company)
-        %td= link_to 'Delete', company, method: :delete
+            %td
+              - company.employees.each do |employee|
+                = link_to employee.name, employee
   Total:
   = @companies.count
