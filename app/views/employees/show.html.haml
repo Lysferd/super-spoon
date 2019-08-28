@@ -1,23 +1,32 @@
 %p#notice= notice
-%p
-  %strong Cpf:
-  = @employee.cpf
-%p
-  %strong Name:
-  = @employee.name
-%p
-  %strong Company:
-  = link_to @employee.company.name, @employee.company
-%p
-  %strong Last visits:
-  %br
-  - @employee.appointments.each do |a|
-    = a.description
-    with
-    = link_to a.host.name, a.host
-    at
-    = a.date
-    %br
-= link_to 'Edit', edit_employee_path(@employee)
-|
-= link_to 'Back', employees_path
+
+.container
+  %h1
+    = @employee.name
+  .row
+    .col-25
+      Cpf:
+    .col-75
+      = @employee.cpf
+  .row
+    .col-25
+      Empresa:
+    .col-75
+      = link_to @employee.company.name, @employee.company
+  .row
+    .col-25
+      Últimas visitas:
+    .col-75
+      - if @employee.appointments.empty?
+        Nenhuma Visita
+      - else
+        - @employee.appointments.each do |appointment|
+          = link_to appointment.description, appointment
+          com
+          = link_to appointment.host.name, appointment.host
+          em
+          = appointment.date
+          %br/
+  = link_to 'Editar', edit_employee_path(@employee)
+  |
+  = link_to 'Voltar', employees_path

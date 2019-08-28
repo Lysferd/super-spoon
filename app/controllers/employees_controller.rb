@@ -20,6 +20,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
+    @companies = Company.all
   end
 
   # POST /employees

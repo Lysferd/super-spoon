@@ -1,20 +1,19 @@
 %p#notice= notice
-%h1 Employee
-%table
-  %thead
-    %tr
-      %th Cpf
-      %th Name
-      %th Company
-      %th{:colspan => "3"}
-  %tbody
-    - @employees.each do |employee|
-      %tr
-        %td= employee.cpf
-        %td= employee.name
-        %td= link_to employee.company.name, employee.company
-        %td= link_to 'Show', employee
-        %td= link_to 'Edit', edit_employee_path(employee)
-        %td= link_to 'Destroy', employee, method: :delete
-%br/
-= link_to 'New Visitor', new_employee_path
+
+%h1
+  Funcionários
+  = link_to ?+, new_employee_path
+
+- if @employees.empty?
+  %p Nada encontrado.
+- else
+  .container
+    %table
+      %th Nome:
+      %th Cpf:
+      %th Empresa:
+      - @employees.each do |employee|
+        %tr
+          %td= link_to employee.name, employee
+          %td= employee.cpf
+          %td= link_to employee.company.name, employee.company
