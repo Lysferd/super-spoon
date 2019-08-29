@@ -26,7 +26,10 @@ class EmployeesController < ApplicationController
   # POST /employees
   # POST /employees.json
   def create
-    @employee = Employee.new(employee_params)
+    params = employee_params
+    params[:created_by_id] = current_user.id
+
+    @employee = Employee.new(params)
 
     respond_to do |format|
       if @employee.save
@@ -42,8 +45,11 @@ class EmployeesController < ApplicationController
   # PATCH/PUT /employees/1
   # PATCH/PUT /employees/1.json
   def update
+    params = employee_params
+    params[:updated_by_id] = current_user.id
+
     respond_to do |format|
-      if @employee.update(employee_params)
+      if @employee.update(params)
         format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee }
       else

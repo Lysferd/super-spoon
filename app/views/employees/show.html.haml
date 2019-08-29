@@ -27,6 +27,17 @@
           em
           = appointment.date
           %br/
-  = link_to 'Editar', edit_employee_path(@employee)
-  |
-  = link_to 'Voltar', employees_path
+  %p
+    Criado por
+    = link_to @employee.created_by.name, @employee.created_by
+    em
+    = @employee.created_at
+    %br
+    - if @employee.updated?
+      Atualizado por
+      = link_to @employee.updated_by.name, @employee.updated_by
+      em
+      = @employee.updated_at
+  %p
+    = link_to 'Editar', edit_employee_path(@employee)
+    = link_to 'Apagar', @employee, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

@@ -15,7 +15,7 @@
         %tr
           %td= link_to facility.name, facility
           - if facility.residents.empty?
-            %td (empty)
+            %td (Nenhum morador)
           - else
             %td
               - facility.residents.each do |resident|

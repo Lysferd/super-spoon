@@ -31,7 +31,7 @@ class FacilitiesController < ApplicationController
 
     respond_to do |format|
       if @facility.save
-        format.html { redirect_to @facility, notice: 'Facility was successfully created.' }
+        format.html { redirect_to @facility, notice: 'Prédio cadastrado com sucesso.' }
         format.json { render :show, status: :created, location: @facility }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class FacilitiesController < ApplicationController
 
     respond_to do |format|
       if @facility.update(params)
-        format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
+        format.html { redirect_to @facility, notice: 'Prédio atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @facility }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to facilities_url, notice: 'Facility was successfully destroyed.' }
+      format.html { redirect_to facilities_url, notice: 'Prédio descadastrado.' }
       format.json { head :no_content }
     end
   end

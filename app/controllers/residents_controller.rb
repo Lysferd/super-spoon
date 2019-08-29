@@ -33,7 +33,7 @@ class ResidentsController < ApplicationController
 
     respond_to do |format|
       if @resident.save
-        format.html { redirect_to @resident, notice: 'Resident was successfully created.' }
+        format.html { redirect_to @resident, notice: 'Novo morador cadastrado com sucesso.' }
         format.json { render :show, status: :created, location: @resident }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class ResidentsController < ApplicationController
 
     respond_to do |format|
       if @resident.update(params)
-        format.html { redirect_to @resident, notice: 'Resident was successfully updated.' }
+        format.html { redirect_to @resident, notice: 'Morador atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @resident }
       else
         format.html { render :edit }
@@ -64,7 +64,7 @@ class ResidentsController < ApplicationController
   def destroy
     @resident.destroy
     respond_to do |format|
-      format.html { redirect_to residents_url, notice: 'Resident was successfully destroyed.' }
+      format.html { redirect_to residents_url, notice: 'Morador descadastrado.' }
       format.json { head :no_content }
     end
   end
