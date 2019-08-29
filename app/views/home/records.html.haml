@@ -1,0 +1,27 @@
+
+%p#alert= alert
+%p#notice= notice
+
+.container
+  %h1 Histórico de Visitas
+
+  .row
+    .form
+      = form_with do
+        %table
+          %tr
+            %td
+              = radio_button :record, :source, 'facilities'
+              Por prédio
+            %td
+              = radio_button :record, :source, 'residents'
+              Por morador
+            %td
+              = radio_button :record, :source, 'visitor'
+              Por visitante
+          %tr
+            %td{ colspan: 3 }
+              = submit_tag 'Próximo'
+
+.new_content
+

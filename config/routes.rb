@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'dev' => 'home#dev'
 
-  get 'next' => 'home#next'
+  get 'records' => 'home#records'
+  post 'records' => 'home#records'
 
   resources :facilities
   resources :companies

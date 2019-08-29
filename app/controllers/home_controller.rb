@@ -62,6 +62,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def records
+  end
+
   def dev
     @facilities = Facility.all
     @companies = Company.all
