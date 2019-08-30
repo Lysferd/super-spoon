@@ -1,22 +1,21 @@
-.container
-  = form_with(model: company, local: true) do |form|
-    - if company.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(company.errors.count, "error")
-          prohibited this company from being saved:
-        %ul
-          - company.errors.full_messages.each do |message|
-            %li= message
-    .row
-      .col-25
-        = form.label :name, 'Nome da empresa'
-      .col-75
-        = form.text_field :name, required: true
-    .row
-      .col-25
-        = form.label :cnpj, 'Cnpj'
-      .col-75
-        = form.text_field :cnpj, required: true
-    .row
-      = form.submit 'Avançar'
+= form_with(model: company, local: true) do |form|
+  - if company.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(company.errors.count, "error")
+        prohibited this company from being saved:
+      %ul
+        - company.errors.full_messages.each do |message|
+          %li= message
+  .row
+    .col-25
+      = form.label :name, 'Nome da empresa'
+    .col-75
+      = form.text_field :name, required: true
+  .row
+    .col-25
+      = form.label :cnpj, 'Cnpj'
+    .col-75
+      = form.text_field :cnpj, required: true
+  .row
+    = form.submit 'Avançar'

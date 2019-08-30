@@ -1,5 +1,6 @@
-%h1 New visitor
-
-= render 'form'
-
-= link_to 'Back', visitors_path
+.container
+  %h1 Novo visitante
+  %hr
+  = render 'form', visitor: @visitor
+  %p
+    = link_to 'Voltar', visitors_path

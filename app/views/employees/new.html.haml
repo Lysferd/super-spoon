@@ -1,3 +1,6 @@
-%h1 Novo Funcionário
-= render 'form', employee: @employee
-= link_to 'Back', employees_path
+.container
+  %h1 Novo Funcionário
+  %hr
+  = render 'form', employee: @employee
+  %p
+    = link_to 'Voltar', employees_path

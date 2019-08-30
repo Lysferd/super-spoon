@@ -1,2 +1,6 @@
-%h1 Novo Prédio
-= render 'form', facility: @facility
+.container
+  %h1 Novo Prédio
+  %hr
+  = render 'form', facility: @facility
+  %p
+    = link_to 'Voltar', facilities_path

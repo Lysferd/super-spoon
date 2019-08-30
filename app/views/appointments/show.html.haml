@@ -1,17 +1,33 @@
-%p#notice= notice
-%p
-  %strong Description:
-  = @appointment.description
-%p
-  %strong Host:
-  = link_to @appointment.host.name, @appointment.host
-%p
-  %strong Visitor:
-  = link_to @appointment.visitor.name, @appointment.visitor
-
-%p
-  %strong Date
-  = @appointment.date
-= link_to 'Edit', edit_appointment_path(@appointment)
-|
-= link_to 'Back', appointments_path
+.container
+  %h1
+    = @appointment.description
+  %hr
+  .row
+    .col-25
+      Morador:
+    .col-75
+      = link_to @appointment.host.name, @appointment.host
+  .row
+    .col-25
+      Visitante:
+    .col-75
+      = link_to @appointment.visitor.name, @appointment.visitor
+  .row
+    .col-25
+      Data da Visita:
+    .col-75
+      = @appointment.date
+  %p
+    Criado por
+    = link_to @appointment.created_by.name, @appointment.created_by
+    em
+    = @appointment.created_at
+    %br
+    - if @appointment.updated?
+      Atualizado por
+      = link_to @appointment.updated_by.name, @appointment.updated_by
+      em
+      = @appointment.updated_at
+  %p
+    = link_to 'Editar', edit_appointment_path(@appointment)
+    = link_to 'Apagar', @appointment, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

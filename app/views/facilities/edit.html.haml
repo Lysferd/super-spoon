@@ -1,2 +1,6 @@
-%h1 Editando prédio
-= render 'form', facility: @facility
+.container
+  %h1 Editando prédio
+  %hr
+  = render 'form', facility: @facility
+  %p
+    = link_to 'Voltar', @facility

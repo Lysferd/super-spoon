@@ -1,27 +1,26 @@
-.container
-  = form_with(model: employee, local: true) do |form|
-    - if employee.errors.any?
-      #error_explanation
-        %h2
-          = pluralize(employee.errors.count, "error")
-          prohibited this employee from being saved:
-        %ul
-          - employee.errors.full_messages.each do |message|
-            %li= message
-    .row
-      .col-25
-        = form.label :name, 'Nome do funcionário:'
-      .col-75
-        = form.text_field :name, required: true
-    .row
-      .col-25
-        = form.label :cpf, 'Cpf:'
-      .col-75
-        = form.text_field :cpf, placeholder: 'XXX.XXX.XXX-XX', data: { mask: '999.999.999-99' }, required: true
-    .row
-      .col-25
-        = form.label :company_id, 'Empresa:'
-      .col-75
-        = form.collection_select :company_id, @companies, :id, :name, required: true
-    .row
-      = form.submit 'Avançar'
+= form_with(model: employee, local: true) do |form|
+  - if employee.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(employee.errors.count, "error")
+        prohibited this employee from being saved:
+      %ul
+        - employee.errors.full_messages.each do |message|
+          %li= message
+  .row
+    .col-25
+      = form.label :name, 'Nome do funcionário:'
+    .col-75
+      = form.text_field :name, required: true
+  .row
+    .col-25
+      = form.label :cpf, 'Cpf:'
+    .col-75
+      = form.text_field :cpf, placeholder: 'XXX.XXX.XXX-XX', data: { mask: '999.999.999-99' }, required: true
+  .row
+    .col-25
+      = form.label :company_id, 'Empresa:'
+    .col-75
+      = form.collection_select :company_id, @companies, :id, :name, required: true
+  .row
+    = form.submit 'Avançar'

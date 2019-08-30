@@ -60,10 +60,15 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
-    @company.destroy
     respond_to do |format|
-      format.html { redirect_to companies_url, notice: 'Empresa descadastrada.' }
-      format.json { head :no_content }
+      if @company.employees.empty?
+        @company.destroy
+        format.html { redirect_to companies_url, notice: 'Empresa descadastrada.' }
+        format.json { head :no_content }
+      else
+        flash.now[:alert] = 'Não é possivel apagar uma empresa enquanto houverem funcionários cadastrados na mesma.'
+        format.html { render :show }
+      end
     end
   end
 

@@ -7,14 +7,20 @@
       %ul
         - appointment.errors.full_messages.each do |message|
           %li= message
-  .field
-    = form.label :description
-    = form.text_area :description
-  .field
-    = form.label :host_id
-    = form.collection_select :host_id, @residents, :id, :name
-  .field
-    = form.label :visitor_id
-    = form.collection_select :visitor_id, @visitors, :id, :name
-  .actions
-    = form.submit
+  .row
+    .col-25
+      = form.label :description, 'Descrição da Visita'
+    .col-75
+      = form.text_field :description, required: true
+  .row
+    .col-25
+      = form.label :host_id
+    .col-75
+      = form.collection_select :host_id, @residents, :id, :name
+  .row
+    .col-25
+      = form.label :visitor_id
+    .col-75
+      = form.collection_select :visitor_id, @visitors, :id, :name
+  .row
+    = form.submit 'Avançar'

@@ -1,3 +1,6 @@
-%h1 New Appointment
-= render 'form', appointment: @appointment
-= link_to 'Back', appointments_path
+.container
+  %h1 Nova visita
+  %hr
+  = render 'form', appointment: @appointment
+  %p
+    = link_to 'Voltar', appointments_path

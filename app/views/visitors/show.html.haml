@@ -1,12 +1,37 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @visitor.name
-%p
-  %b Cpf:
-  = @visitor.cpf
-
-= link_to 'Edit', edit_visitor_path(@visitor)
-\|
-= link_to 'Back', visitors_path
+.container
+  %h1
+    = @visitor.name
+    %hr
+  .row
+    .col-25
+      Cpf:
+    .col-75
+      = @visitor.cpf
+  .row
+    .col-25
+      Últimas visitas:
+    .col-75
+      - if @visitor.appointments.empty?
+        Nenhuma visita
+      - else
+        - @visitor.appointments.each do |appointment|
+          = link_to appointment.description, appointment
+          com
+          = link_to appointment.host.name, appointment.host
+          em
+          = appointment.date
+          %br/
+  %p
+    Criado por
+    = link_to @visitor.created_by.name, @visitor.created_by
+    em
+    = @visitor.created_at
+    %br
+    - if @visitor.updated?
+      Atualizado por
+      = link_to @visitor.updated_by.name, @visitor.updated_by
+      em
+      = @visitor.updated_at
+  %p
+    = link_to 'Editar', edit_visitor_path(@visitor)
+    = link_to 'Apagar', @visitor, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

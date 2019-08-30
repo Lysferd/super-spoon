@@ -62,10 +62,16 @@ class ResidentsController < ApplicationController
   # DELETE /residents/1
   # DELETE /residents/1.json
   def destroy
-    @resident.destroy
+
     respond_to do |format|
-      format.html { redirect_to residents_url, notice: 'Morador descadastrado.' }
-      format.json { head :no_content }
+      if @resident.appointments.empty?
+        @resident.destroy
+        format.html { redirect_to residents_url, notice: 'Morador descadastrado.' }
+        format.json { head :no_content }
+      else
+        flash.now[:alert] = 'Não é possivel apagar um morador enquanto ainda houverem visitas cadastradas.'
+        format.html { render :show }
+      end
     end
   end
 

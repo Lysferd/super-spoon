@@ -24,11 +24,14 @@ class VisitorsController < ApplicationController
   # POST /visitors
   # POST /visitors.json
   def create
-    @visitor = Visitor.new(visitor_params)
+    params = visitor_params
+    params[:created_by_id] = current_user.id
+
+    @visitor = Visitor.new(params)
 
     respond_to do |format|
       if @visitor.save
-        format.html { redirect_to @visitor, notice: 'Visitor was successfully created.' }
+        format.html { redirect_to @visitor, notice: 'Visitante cadastrado com sucesso.' }
         format.json { render :show, status: :created, location: @visitor }
       else
         format.html { render :new }
@@ -40,9 +43,12 @@ class VisitorsController < ApplicationController
   # PATCH/PUT /visitors/1
   # PATCH/PUT /visitors/1.json
   def update
+    params = visitor_params
+    params[:updated_by_id] = current_user.id
+
     respond_to do |format|
-      if @visitor.update(visitor_params)
-        format.html { redirect_to @visitor, notice: 'Visitor was successfully updated.' }
+      if @visitor.update(params)
+        format.html { redirect_to @visitor, notice: 'Visitante atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @visitor }
       else
         format.html { render :edit }
@@ -54,10 +60,16 @@ class VisitorsController < ApplicationController
   # DELETE /visitors/1
   # DELETE /visitors/1.json
   def destroy
-    @visitor.destroy
+
     respond_to do |format|
-      format.html { redirect_to visitors_url, notice: 'Visitor was successfully destroyed.' }
-      format.json { head :no_content }
+      if @visitor.appointments.empty?
+        @visitor.destroy
+        format.html { redirect_to visitors_url, notice: 'Visitante descadastrado.' }
+        format.json { head :no_content }
+      else
+        flash.now[:alert] = 'Não é possivel apagar um visitante enquanto ainda houverem visitas marcadas.'
+        format.html { render :show }
+      end
     end
   end
 

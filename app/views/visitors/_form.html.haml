@@ -1,16 +1,21 @@
-= form_for @visitor do |f|
-  - if @visitor.errors.any?
+= form_with(model: visitor, local: true) do |form|
+  - if visitor.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@visitor.errors.count, "error")} prohibited this visitor from being saved:"
+      %h2
+        = pluralize(visitor.errors.count, "error")
+        prohibited this visitor from being saved:"
       %ul
-        - @visitor.errors.full_messages.each do |message|
+        - visitor.errors.full_messages.each do |message|
           %li= message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :cpf
-    = f.text_field :cpf
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-25
+      = form.label :name, 'Nome do visitante:'
+    .col-75
+      = form.text_field :name, required: true
+  .row
+    .col-25
+      = form.label :cpf, 'Cpf:'
+    .col-75
+      = form.text_field :cpf, required: true
+  .row
+    = form.submit 'Avançar'

@@ -1,13 +1,14 @@
 %p#notice= notice
 
-%h1
-  Empresas
-  = link_to ?+, new_company_path
+.container
+  %h1
+    Empresas
+    = link_to ?+, new_company_path
+  %hr
 
-- if @companies.empty?
-  %p Nada encontrado.
-- else
-  .container
+  - if @companies.empty?
+    %p Nada encontrado.
+  - else
     %table
       %th Nome
       %th CNPJ

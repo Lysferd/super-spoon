@@ -1,2 +1,6 @@
-%h1 Novo morador
-= render 'form', resident: @resident
+.container
+  %h1 Novo morador
+  %hr
+  = render 'form', resident: @resident
+  %p
+    = link_to 'Voltar', residents_path

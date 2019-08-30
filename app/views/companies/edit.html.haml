@@ -1,2 +1,6 @@
-%h1 Editando empresa
-= render 'form', company: @company
+.container
+  %h1 Editando empresa
+  %hr
+  = render 'form', company: @company
+  %p
+    = link_to 'Voltar', @company

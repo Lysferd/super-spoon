@@ -60,10 +60,16 @@ class FacilitiesController < ApplicationController
   # DELETE /facilities/1
   # DELETE /facilities/1.json
   def destroy
-    @facility.destroy
+    
     respond_to do |format|
-      format.html { redirect_to facilities_url, notice: 'Prédio descadastrado.' }
-      format.json { head :no_content }
+      if @facility.residents.empty?
+        @facility.destroy
+        format.html { redirect_to facilities_url, notice: 'Prédio descadastrado.' }
+        format.json { head :no_content }
+      else
+        flash.now[:alert] = 'Não é possivel apagar um prédio enquanto houverem moradores cadastrados no mesmo.'
+        format.html { render :show }
+      end
     end
   end
 

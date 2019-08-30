@@ -1,13 +1,12 @@
-%p#notice= notice
+.container
+  %h1
+    Prédios
+    = link_to ?+, new_facility_path
+  %hr
 
-%h1
-  Prédios
-  = link_to ?+, new_facility_path
-
-- if @facilities.empty?
-  %p Nada encontrado.
-- else
-  .container
+  - if @facilities.empty?
+    %p Nada encontrado.
+  - else
     %table
       %th Nome
       %th Moradores

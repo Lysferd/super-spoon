@@ -1,13 +1,12 @@
-%p#notice= notice
+.container
+  %h1
+    Funcionários
+    = link_to ?+, new_employee_path
+    %hr
 
-%h1
-  Funcionários
-  = link_to ?+, new_employee_path
-
-- if @employees.empty?
-  %p Nada encontrado.
-- else
-  .container
+  - if @employees.empty?
+    %p Nada encontrado.
+  - else
     %table
       %th Nome:
       %th Cpf:
