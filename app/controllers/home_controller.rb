@@ -84,8 +84,22 @@ class HomeController < ApplicationController
         appointments.concat Resident.find_by_id(params[:resident][:id]).appointments
       end
 
-      # This one is tricky. Can be Employee or Visitor, which can share the IDs.
+      if params[:filters].include? 'employee'
+        appointments.concat Employee.find_by_id( params[:employee][:id] ).appointments
+      end
+
       if params[:filters].include? 'visitor'
+        appointments.concat Visitor.find_by_id( params[:visitor][:id] ).appointments
+      end
+
+      if params[:filters].include? 'cpf'
+        if Employee.exists? cpf: params[:cpf]
+          appointments.concat(Employee.find_by(cpf: params[:cpf]).appointments)
+        end
+
+        if Visitor.exists? cpf: params[:cpf]
+          appointments.concat(Visitor.find_by(cpf: params[:cpf]).appointments)
+        end
       end
       
       @appointments = appointments.uniq # might be nil
