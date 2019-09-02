@@ -22,10 +22,16 @@
             = select :resident, Resident::all
         .row
           .col-25
+            = check_box_tag filters, :employee, false, id: :filter_employee
+            = label :employee, 'Funcionário:', for: :filter_employee
+          .col-75
+            = select :employee, Employee::all
+        .row
+          .col-25
             = check_box_tag filters, :visitor, false, id: :filter_visitor
             = label :visitor, 'Visitante:', for: :filter_visitor
           .col-75
-            = select :visitor, Visitor::all + Employee::all
+            = select :visitor, Visitor::all
         .row
           .col-25
             = check_box_tag filters, :cpf, false, id: :filter_cpf
