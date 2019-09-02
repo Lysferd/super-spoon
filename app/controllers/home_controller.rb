@@ -47,6 +47,7 @@ class HomeController < ApplicationController
       @appointment.description = params[:description]
       @appointment.professional = params[:purpose] == 'professional'
       @appointment.visitor_type = @visitor.class.name
+      @appointment.created_by_id = current_user.id
 
       
       if @visitor.id

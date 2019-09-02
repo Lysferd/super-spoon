@@ -26,6 +26,9 @@
       = hidden_field_tag :name, @visitor.name
       - if params[:purpose] == 'professional'
         = hidden_field_tag :company_id, params[:company_id]
+        = hidden_field_tag :visitor_type, Employee.to_s
+      - else
+        = hidden_field_tag :visitor_type, Visitor.to_s
       = submit_tag 'Avançar'
 
 :javascript

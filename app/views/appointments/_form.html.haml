@@ -19,8 +19,8 @@
       = form.collection_select :host_id, @residents, :id, :name
   .row
     .col-25
-      = form.label :visitor_id
+      = form.label :visitor
     .col-75
-      = form.collection_select :visitor_id, @visitors, :id, :name
+      = form.collection_select :visitor, @visitors, :id_with_type, :name
   .row
     = form.submit 'Avançar'

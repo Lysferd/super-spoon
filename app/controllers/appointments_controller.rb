@@ -30,6 +30,8 @@ class AppointmentsController < ApplicationController
   def create
     params = appointment_params
     params[:created_by_id] = current_user.id
+    params[:visitor_id], params[:visitor_type] = params[:visitor].split ?#
+    params.delete :visitor
 
     @appointment = Appointment.new(params)
 
@@ -79,6 +81,6 @@ class AppointmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:description, :resident_id, :employee_id)
+      params.require(:appointment).permit(:description, :host_id, :visitor)
     end
 end
