@@ -17,6 +17,7 @@
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.js
 //= require jquery.timepicker.js
 //= require jquery.inputmask.min.js
+//= require jquery.mask.js
 //= require activestorage
 //= require turbolinks
 //= require_tree .
