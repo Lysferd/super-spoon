@@ -4,7 +4,7 @@
 
 $ ->
   # CPF Mask (tentative)
-  $('#cpf').inputmask()
+  $('#cpf').mask("000.000.000-00")
 
   # DatePicker
   $("#my-datepicker").datepicker({
