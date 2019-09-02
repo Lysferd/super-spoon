@@ -1,4 +1,12 @@
 
-.container
-  %h1
-    Facility Search
+.form
+  = form_with do
+    = hidden_field_tag :source, params[:source]
+    .row
+      .col-25
+        Histórico de Visitas por Prédio:
+      .col-75
+        = collection_select :facility, :id, Facility.all, :id, :name, required: true, prompt: true
+    .row
+      .col-75
+        = submit_tag 'Próximo'

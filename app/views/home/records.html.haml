@@ -1,27 +1,41 @@
 
-%p#alert= alert
-%p#notice= notice
-
 .container
   %h1 Histórico de Visitas
+  %hr
 
-  .row
+  // Record Filters
+  #filters
     .form
       = form_with do
-        %table
-          %tr
-            %td
-              = radio_button :record, :source, 'facilities'
-              Por prédio
-            %td
-              = radio_button :record, :source, 'residents'
-              Por morador
-            %td
-              = radio_button :record, :source, 'visitor'
-              Por visitante
-          %tr
-            %td{ colspan: 3 }
-              = submit_tag 'Próximo'
+        - filters = 'filters[]' # a little helper
+        .row
+          .col-25
+            = check_box_tag filters, :facility, false, id: :filter_facility
+            = label :facility, 'Prédio:', for: :filter_facility
+          .col-75
+            = select :facility, Facility::all
+        .row
+          .col-25
+            = check_box_tag filters, :resident, false, id: :filter_resident
+            = label :resident, 'Morador:', for: :filter_resident
+          .col-75
+            = select :resident, Resident::all
+        .row
+          .col-25
+            = check_box_tag filters, :visitor, false, id: :filter_visitor
+            = label :visitor, 'Visitante:', for: :filter_visitor
+          .col-75
+            = select :visitor, Visitor::all + Employee::all
+        .row
+          .col-25
+            = check_box_tag filters, :cpf, false, id: :filter_cpf
+            = label :cpf, 'CPF:', for: :filter_cpf
+          .col-75
+            = text_field_tag :cpf
+        .row
+          .col-75  
+            = submit_tag 'Buscar', data: { disable_with: 'Buscando...' }
 
-.new_content
+// Records
+#history{ style: 'display: none;' }
 

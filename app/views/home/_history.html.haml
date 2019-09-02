@@ -1,0 +1,32 @@
+
+:sass
+  .float-r
+    float: right
+
+  .float-l
+    float: left
+
+:coffee
+  $ '#close'
+    .click -> $('#history').slideUp 500
+
+.container
+  .float-r= button_tag 'Fechar', id: :close
+  .float-f= button_tag 'Exportar'
+  %p
+  - unless appointments
+    %p Nenhuma visita foi encontrada!
+  - else
+    %p= appointments.count
+    %table
+      %th Data e Hora
+      %th Visitado
+      %th Visitante
+      %th Motivo
+      - appointments.each do |a|
+        %tr
+          %td= a.date
+          %td= link_to a.host.name, a.host
+          %td= link_to a.visitor.name, a.visitor
+          %td= a.description
+

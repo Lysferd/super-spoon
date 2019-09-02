@@ -1,10 +1,10 @@
 $ ->
-  $ '#notice'
-    .on 'ajax:success', (event) -> @.html 'AJAX Successful'
-  $ '#notice'
-    .on 'ajax:error', (event) -> @.html 'AJAX Failed'
+  $('form').on 'ajax:success', (event) ->
+    $('.notice').html 'AJAX Success'
+  $('form').on 'ajax:error', (event) ->
+    $('.notice').html 'AJAX Failed'
 
-  $ '.new_content'
-    .html "<%= j render partial: 'facilities' %>"
-  $ '.new_content'
-    .slideDown('slow')
+  $ '#history'
+    .html "<%= j render partial: 'history', locals: { appointments: @appointments } %>"
+    .slideDown 500
+

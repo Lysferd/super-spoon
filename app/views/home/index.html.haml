@@ -1,16 +1,17 @@
-#alert= alert
-#notice= notice
 
 .container
+  %h1 Nova Visita
+  %hr
+
   = form_with method: :get, local: true do
     .row
       .col-25
         = label_tag :purpose, 'Motivo da Visita:'
       .col-75
         = radio_button_tag :purpose, 'particular', params[:purpose] == 'particular', required: true
-        Particular
-        = radio_button_tag :purpose, 'professional', params[:purpose] == 'professional', required: true
-        Profissional (Serviço)
+        = label :particular, 'Particular', for: :purpose_particular
+        = radio_button_tag :purpose, 'professional', params[:purpose] == 'professional'
+        = label :professional, 'Profissional (Serviço)', for: :purpose_professional
     .row
       .col-25
         = label_tag :facility, 'Localidade:'

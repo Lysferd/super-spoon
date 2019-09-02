@@ -27,4 +27,8 @@ module HomeHelper
     return rows_for_resident(object) if object.kind_of? Resident
     return rows_for_employee(object) if object.kind_of? Employee
   end
+
+  def select name, collection
+    collection_select name, :id, collection, :id, :name, include_blank: true
+  end
 end

@@ -62,7 +62,35 @@ class HomeController < ApplicationController
     end
   end
 
+  #   Parameters: {"utf8"=>"✓",
+  #               "authenticity_token"=>"HASH",
+  #               "filters"=>["facility"],
+  #               "facility"=>{"id"=>"1"},
+  #               "resident"=>{"id"=>""},
+  #               "cpf"=>"",
+  #               "commit"=>"Buscar"}
   def records
+    # If filter parameters have been set, start the filtering.
+    if params[:filters]
+      appointments = [ ]
+
+      # If a facility has been filtered, then filter by all residents
+      if params[:filters].include? 'facility'
+        appointments.concat Facility.find_by_id(params[:facility][:id]).appointments
+      end
+
+      # If a host has been selected, add it to the filtering
+      if params[:filters].include? 'resident'
+        appointments.concat Resident.find_by_id(params[:resident][:id]).appointments
+      end
+
+      # This one is tricky. Can be Employee or Visitor, which can share the IDs.
+      if params[:filters].include? 'visitor'
+      end
+      
+      @appointments = appointments.uniq # might be nil
+
+    end
   end
 
   def dev
