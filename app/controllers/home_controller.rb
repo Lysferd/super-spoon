@@ -53,6 +53,7 @@ class HomeController < ApplicationController
       if @visitor.id
         @appointment.visitor_id = @visitor.id
       else
+        @visitor.created_by_id = current_user.id
         @visitor.save
 	      @appointment.visitor_id = @visitor.id
       end
