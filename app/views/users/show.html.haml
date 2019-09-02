@@ -1,18 +1,14 @@
-%p#notice= notice
+.container
+  %h1
+    = @user.name
+  %hr
+  .row
+    .col-25
+      ID (Interna)
+    .col-75
+      = @user.id
 
-%sub
-  = link_to '[home]', root_path
-  = link_to '[dev]', dev_path
-  = link_to '[return]', users_path
-
-%p
-  %b Name:
-  = @user.name
-%p
-  %b Password (hash):
-  = @user.password_digest
-%p
-  %b ID (internal):
-  = @user.id
-
-= link_to 'Edit', edit_user_path(@user)
+  %p
+    = link_to 'Edit', edit_user_path(@user)
+    - if current_user.is_dev?
+      = link_to 'Apagar', @user, method: :delete, data: { confirm: 'Esta ação é irreversível. Deseja continuar?' }

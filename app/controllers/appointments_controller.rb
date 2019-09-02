@@ -51,6 +51,8 @@ class AppointmentsController < ApplicationController
   def update
     params = appointment_params
     params[:updated_by_id] = current_user.id
+    params[:visitor_id], params[:visitor_type] = params[:visitor].split ?#
+    params.delete :visitor
 
     respond_to do |format|
       if @appointment.update(params)

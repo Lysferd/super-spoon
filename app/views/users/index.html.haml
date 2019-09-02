@@ -1,23 +1,19 @@
-%p#notice= notice
-%sub
-  = link_to '[home]', root_path
-  = link_to '[dev]', dev_path
+.container
+  %h1
+    Usuários
+    = link_to '+', new_user_path
+  %hr
 
-%h1
-  Users
-  = link_to '+', new_user_path
+  - if @users.empty?
+    %p Nada encontrado.
+  - else
+    %table
+      %th Nome de Usuário
+      %th Senha
+      - @users.each do |user|
+        %tr
+          %td= link_to user.name, user
+          %td (hidden)
 
-%table
-  %th Name
-  %th Password
-  %th{ colspan: 3 } Actions
-  - @users.each do |user|
-    %tr
-      %td= user.name
-      %td (hidden)
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Delete', user, method: :delete
-
-Total:
-= @users.count
+  Total:
+  = @users.count

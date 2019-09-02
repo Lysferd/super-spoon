@@ -1,19 +1,26 @@
-= form_for @user do |f|
-  - if @user.errors.any?
+= form_with(model: user, local: true) do |form|
+  - if user.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %h2
+        = pluralize(user.errors.count, "error")
+        prohibited this user from being saved:
       %ul
-        - @user.errors.full_messages.each do |message|
+        - user.errors.full_messages.each do |message|
           %li= message
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :password
-    = f.text_field :password
-  .field
-    = f.label :password_confirmation
-    = f.text_field :password_confirmation
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-25
+      = form.label :name, 'Nome de usuário'
+    .col-75
+      = form.text_field :name, autocapitalize: false
+  .row
+    .col-25
+      = form.label :password, 'Senha'
+    .col-75
+      = form.text_field :password
+  .row
+    .col-25
+      = form.label :password_confirmation
+    .col-75
+      = form.text_field :password_confirmation
+  .row
+    = form.submit 'Avançar'

@@ -1,8 +1,10 @@
 .container
+  .float-r= button_to 'Novo', new_facility_path, method: :get
   %h1
     Prédios
     = link_to ?+, new_facility_path
   %hr
+
 
   - if @facilities.empty?
     %p Nada encontrado.
