@@ -1,8 +1,7 @@
 .container
-  %h1
-    Moradores
-    = link_to '+', new_resident_path
+  %h1 Moradores
   %hr
+  = button_to 'Novo', new_resident_path, method: :get
 
   - if @residents.empty?
     %p Nada encontrado.

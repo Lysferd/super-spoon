@@ -16,7 +16,7 @@
       .col-25
         = label_tag :facility, 'Localidade:'
       .col-75
-        = collection_select :facility, :id, Facility::all, :id, :name, required: true, prompt: true
+        = collection_select :facility, :id, Facility::all, :id, :name, required: true, prompt: "Selecione um local."
     .row
       = submit_tag 'Avançar'
 

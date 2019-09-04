@@ -11,7 +11,12 @@ class HomeController < ApplicationController
     end
 
     if params[:facility]
-      params[:facility_id] = params[:facility][:id]
+      unless params[:facility][:id].empty?
+        flash.clear
+        params[:facility_id] = params[:facility][:id]
+      else
+        flash[:alert] = "Escolha um Local."
+      end
     end
 
     if params[:facility_id] #!@facility

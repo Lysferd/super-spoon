@@ -1,8 +1,7 @@
 .container
-  %h1
-    Visitantes
-    = link_to ?+, new_visitor_path
-    %hr
+  %h1 Visitantes
+  %hr
+  = button_to 'Novo', new_visitor_path, method: :get
 
   - if @visitors.empty?
     %p Nada encontrado.

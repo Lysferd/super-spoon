@@ -1,8 +1,7 @@
 .container
-  %h1
-    Funcionários
-    = link_to ?+, new_employee_path
-    %hr
+  %h1 Funcionários
+  %hr
+  = button_to 'Novo', new_employee_path, method: :get
 
   - if @employees.empty?
     %p Nada encontrado.

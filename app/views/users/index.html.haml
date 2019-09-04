@@ -1,8 +1,7 @@
 .container
-  %h1
-    Usuários
-    = link_to '+', new_user_path
+  %h1 Usuários
   %hr
+  = button_to 'Novo', new_user_path, method: :get
 
   - if @users.empty?
     %p Nada encontrado.

@@ -1,8 +1,7 @@
 .container
-  %h1
-    Empresas
-    = link_to ?+, new_company_path
+  %h1 Empresas
   %hr
+  = button_to 'Novo', new_company_path, method: :get
 
   - if @companies.empty?
     %p Nada encontrado.

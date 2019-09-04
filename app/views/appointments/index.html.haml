@@ -1,8 +1,8 @@
 .container
-  %h1
-    Visitas
-    = link_to ?+, new_appointment_path
-    %hr
+  %h1 Visitas
+  %hr
+  = button_to 'Novo', new_appointment_path, method: :get
+
   - if @appointments.empty?
     %p Nada encontrado.
   - else
