@@ -8,24 +8,25 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    .container#menu
-      = link_to 'Nova Visita', root_path
-      |
-      = link_to 'Histórico', records_path
-      |
-      = link_to 'Prédios', facilities_path
-      |
-      = link_to 'Moradores', residents_path
-      |
-      = link_to 'Empresas', companies_path
-      |
-      = link_to 'Funcionários', employees_path
-      |
-      = link_to 'Visitantes', visitors_path
-      |
-      = link_to 'Visitas', appointments_path
-      |
-      = link_to 'Logout', logout_path
+    - if current_user
+      .container#menu
+        = link_to 'Nova Visita', root_path
+        |
+        = link_to 'Histórico', records_path
+        |
+        = link_to 'Prédios', facilities_path
+        |
+        = link_to 'Moradores', residents_path
+        |
+        = link_to 'Empresas', companies_path
+        |
+        = link_to 'Funcionários', employees_path
+        |
+        = link_to 'Visitantes', visitors_path
+        |
+        = link_to 'Visitas', appointments_path
+        |
+        = link_to 'Logout', logout_path
     #alert= alert
     #notice= notice
     = yield
