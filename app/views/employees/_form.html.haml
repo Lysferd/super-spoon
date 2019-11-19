@@ -23,4 +23,9 @@
     .col-75
       = form.collection_select :company_id, @companies, :id, :name, required: true
   .row
+    .col-25
+      = form.label :plate, 'Placa de Veículo'
+    .col-75
+      = form.text_field :plate, id: 'plate', placeholder: 'AAA 1A11'
+  .row
     = form.submit 'Avançar'

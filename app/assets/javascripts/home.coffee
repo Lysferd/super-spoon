@@ -6,6 +6,8 @@ $ ->
   # CPF Mask (tentative)
   $('#cpf').mask("000.000.000-00")
 
+  $('#plate').mask("SSS 0A00")
+
   # DatePicker
   $("#my-datepicker").datepicker({
     language: "pt-BR",

@@ -18,5 +18,10 @@
     .col-75
       = form.text_field :cpf, id: 'cpf', required: true
   .row
+    .col-25
+      = form.label :plate, 'Placa do Veículo'
+    .col-75
+      = form.text_field :plate, id: 'plate'
+  .row
     = form.submit 'Avançar'
 
