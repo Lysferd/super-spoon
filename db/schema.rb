@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 2019_11_19_181528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "plate"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["created_by_id"], name: "index_employees_on_created_by_id"
     t.index ["updated_by_id"], name: "index_employees_on_updated_by_id"
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "number"
     t.index ["created_by_id"], name: "index_residents_on_created_by_id"
     t.index ["facility_id"], name: "index_residents_on_facility_id"
     t.index ["updated_by_id"], name: "index_residents_on_updated_by_id"
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role"
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
@@ -93,6 +96,7 @@ ActiveRecord::Schema.define(version: 7) do
     t.bigint "updated_by_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "plate"
     t.index ["created_by_id"], name: "index_visitors_on_created_by_id"
     t.index ["updated_by_id"], name: "index_visitors_on_updated_by_id"
   end

@@ -4,9 +4,9 @@
   %hr
   .row
     .col-25
-      ID (Interna)
+      Role
     .col-75
-      = @user.id
+      = @user.role?
 
   %p
     = link_to 'Edit', edit_user_path(@user)

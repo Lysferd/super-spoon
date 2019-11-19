@@ -9,10 +9,12 @@
     %table
       %th Nome de Usuário
       %th Senha
+      %th Role
       - @users.each do |user|
         %tr
           %td= link_to user.name, user
           %td (hidden)
+          %td= user.role?
 
   Total:
   = @users.count
