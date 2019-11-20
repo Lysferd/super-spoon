@@ -9,6 +9,11 @@
       = @visitor.cpf
   .row
     .col-25
+      Placa do Veículo:
+    .col-75
+      = @visitor.plate
+  .row
+    .col-25
       Últimas visitas:
     .col-75
       - if @visitor.appointments.empty?

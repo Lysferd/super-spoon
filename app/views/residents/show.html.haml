@@ -9,6 +9,11 @@
       = link_to @resident.facility.name, @resident.facility
   .row
     .col-25
+      Número/Lote
+    .col-75
+      = @resident.number
+  .row
+    .col-25
       Visitas:
     .col-75
       - if @resident.appointments.empty?

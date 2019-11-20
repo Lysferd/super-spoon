@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'records' => 'home#records'
   post 'records' => 'home#records'
+  post 'export' => 'home#export'
 
   resources :facilities
   resources :companies

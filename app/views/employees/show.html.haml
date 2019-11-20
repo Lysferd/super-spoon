@@ -14,6 +14,11 @@
       = link_to @employee.company.name, @employee.company
   .row
     .col-25
+      Placa do Veículo:
+    .col-75
+      = @employee.plate
+  .row
+    .col-25
       Últimas visitas:
     .col-75
       - if @employee.appointments.empty?

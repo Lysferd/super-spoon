@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     end
 
     unless current_user
-      redirect_to login_path, alert: 'Login is required.'
+      redirect_to login_path, alert: 'Login obrigatório.'
     end
   end
 end

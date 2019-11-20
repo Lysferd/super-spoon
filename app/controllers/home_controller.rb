@@ -114,6 +114,18 @@ class HomeController < ApplicationController
     end
   end
 
+  def export
+    appointments = params[:appointments]
+
+    respond_to do |format|
+      format.pdf do
+        render :text => PDFKit.new( render(partial: 'history', locals: {appointments: appointments}) ).to_file('public/test.pdf')
+      end
+    end
+
+    #kit.to_file('public/mypdf.pdf')
+  end
+
   def dev
     @facilities = Facility.all
     @companies = Company.all

@@ -11,15 +11,15 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       
       path = user.id == 1 ? dev_path : root_path
-      redirect_to path, notice: 'Logged in succesfully.'
+      redirect_to path, notice: 'Logou com sucesso.'
     else
-      flash.now[:alert] = 'Name or password is invalid.'
+      flash.now[:alert] = 'Nome e/ou senha inválidos.'
       render 'new'
     end
   end
 
   def destroy
     session.delete :user_id
-    redirect_to login_path, notice: 'Logged out succesfully.'
+    redirect_to login_path, notice: 'Deslogou com sucesso.'
   end
 end

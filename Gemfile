@@ -36,6 +36,9 @@ gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 
+# PDF kit
+gem 'pdfkit'
+
 # Seeding helpers
 gem 'faker'
 
