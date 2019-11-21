@@ -115,7 +115,15 @@ class HomeController < ApplicationController
   end
 
   def export
+    puts ?1 * 100
+
     appointments = params[:appointments]
+
+    pdf = PDFKit::new( render( partial: 'history',
+                               locals: { appointments: appointments } ) )
+    file = pdf.to_file 'public/test.pdf'
+
+    return
 
     respond_to do |format|
       format.pdf do

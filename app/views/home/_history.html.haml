@@ -5,7 +5,7 @@
 
 .container
   .float-r= button_tag 'Fechar', id: :close
-  .float-f= button_tag 'Exportar'
+  .float-f= button_to 'Exportar', export_path
   %p
   - unless appointments
     %p Nenhuma visita foi encontrada!
