@@ -41,6 +41,8 @@ gem 'jquery-timepicker-rails'
 
 # PDF Handler: Prawn
 gem 'prawn-rails'
+# Prawn Table
+gem 'prawn-table'
 
 # Seeding helpers
 gem 'faker'
