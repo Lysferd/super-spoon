@@ -19,13 +19,26 @@
       = form.text_field :password
   .row
     .col-25
-      = form.label :password_confirmation
+      = form.label :password_confirmation, 'Confirme a Senha'
     .col-75
       = form.text_field :password_confirmation
   .row
     .col-25
-      = form.label :role
+      = form.label :role, 'Função'
     .col-75
-      = 123
+      = form.radio_button :role, 1
+      = form.label :role, 'Administrador', value: 1
+      %br
+      = form.radio_button :role, 2
+      = form.label :role, 'Supervisor', value: 2
+      %br
+      = form.radio_button :role, 3
+      = form.label :role, 'Operador', value: 3
+      %br
+      = form.radio_button :role, 4
+      = form.label :role, 'Síndico', value: 4
+      %br
+      = form.radio_button :role, 5
+      = form.label :role, 'Condômino', value: 5
   .row
     = form.submit 'Avançar'

@@ -26,6 +26,9 @@
         |
         = link_to 'Visitas', appointments_path
         |
+        - if current_user.role? == :dev
+          = link_to 'Usuários', users_path
+          |
         = link_to 'Logout', logout_path
     #alert= alert
     #notice= notice

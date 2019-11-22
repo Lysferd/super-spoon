@@ -25,4 +25,15 @@ class User < ApplicationRecord
       when 5 then :resident
     end
   end
+
+  def role_str
+    return case role?
+      when :dev then 'Desenvolvedor'
+      when :admin then 'Administrador'
+      when :supervisor then 'Supervisor'
+      when :operator then 'Operador'
+      when :manager then 'Síndico'
+      when :resident then 'Condômino'
+    end
+  end
 end

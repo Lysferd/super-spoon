@@ -14,7 +14,7 @@
         %tr
           %td= link_to user.name, user
           %td (hidden)
-          %td= user.role?
+          %td= user.role_str
 
   Total:
   = @users.count

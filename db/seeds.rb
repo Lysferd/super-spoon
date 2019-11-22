@@ -11,7 +11,7 @@ require 'cpf_gen'
 require 'cnpj_gen'
 
 # Create DEV user
-dev = User::create name: 'dev', password: 'dev'
+dev = User::create name: 'dev', password: 'dev', role: 0
 
 puts 'Generating data...'
 
@@ -25,11 +25,11 @@ puts 'Generating data...'
   
   # Entities:
   5.times do
-    r = Resident::create name: Faker::Name.unique.name, facility: f, created_by_id: dev.id
+    r = Resident::create name: Faker::Name.unique.name, facility: f, number: rand(100), created_by_id: dev.id
     puts r
-    e = Employee::create name: Faker::Name.unique.name, cpf: CPF::factory, company: c, created_by_id: dev.id
+    e = Employee::create name: Faker::Name.unique.name, cpf: CPF::factory, company: c, plate: 'AAA 0B00', created_by_id: dev.id
     puts e
-    v = Visitor::create name: Faker::Name.unique.name, cpf: CPF::factory, created_by_id: dev.id
+    v = Visitor::create name: Faker::Name.unique.name, cpf: CPF::factory, plate: 'BBB 1A11', created_by_id: dev.id
     puts v
   
     # Appointments:

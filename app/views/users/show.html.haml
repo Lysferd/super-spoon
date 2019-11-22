@@ -4,10 +4,9 @@
   %hr
   .row
     .col-25
-      Role
+      Função:
     .col-75
-      = @user.role?
-
+      = @user.role_str
   %p
     = link_to 'Edit', edit_user_path(@user)
     - if current_user.is_dev?
