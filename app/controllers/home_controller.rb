@@ -110,28 +110,30 @@ class HomeController < ApplicationController
       end
       
       @appointments = appointments.uniq # might be nil
+      puts @appointments
 
     end
   end
 
   def export
-    puts ?1 * 100
-
+    puts ?1 * 10
     appointments = params[:appointments]
+    #puts appointments
 
-    pdf = PDFKit::new( render( partial: 'history',
-                               locals: { appointments: appointments } ) )
-    file = pdf.to_file 'public/test.pdf'
+    send_data generate_pdf(appointments),
+              filename: "test.pdf",
+              type: "application/pdf"
+  end
 
-    return
+  def generate_pdf(appointment_ids)
+    appointments = Appointment.find appointment_ids
+    puts appointments
+    Prawn::Document.new do
+      text "Historico", align: :center
+      text appointments.inspect
+      render partial: 'history', locals: {appointments: appointments} 
 
-    respond_to do |format|
-      format.pdf do
-        render :text => PDFKit.new( render(partial: 'history', locals: {appointments: appointments}) ).to_file('public/test.pdf')
-      end
-    end
-
-    #kit.to_file('public/mypdf.pdf')
+    end.render
   end
 
   def dev

@@ -37,7 +37,10 @@ gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 
 # PDF kit
-gem 'pdfkit'
+#gem 'pdfkit'
+
+# PDF Handler: Prawn
+gem 'prawn-rails'
 
 # Seeding helpers
 gem 'faker'
