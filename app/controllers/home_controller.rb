@@ -1,4 +1,5 @@
 require 'cpf_gen'
+require "prawn/table"
 
 class HomeController < ApplicationController
 
@@ -121,18 +122,31 @@ class HomeController < ApplicationController
     #puts appointments
 
     send_data generate_pdf(appointments),
-              filename: "test.pdf",
+      filename: "History #{Date.today}.pdf",
               type: "application/pdf"
   end
 
   def generate_pdf(appointment_ids)
     appointments = Appointment.find appointment_ids
     puts appointments
-    Prawn::Document.new do
-      text "Historico", align: :center
-      text appointments.inspect
-      render partial: 'history', locals: {appointments: appointments} 
 
+    data = [ ["Data e Hora", "Visitado", "Visitante", "Motivo"] ]
+
+    Prawn::Document.new do
+      text "Histórico de Visitas", align: :center, size: 20
+#      text "Data e Hora | Visitado | Visitante | Motivo"
+      appointments.each do |a|
+        data += [ [a.date.to_s, a.host.name, a.visitor.name, a.description] ]
+#        text a.date.to_s + ?| + a.host.name + ?| + a.visitor.name + ?| + a.description
+      end
+      table data, header: true do
+        row(0).font_style = :bold
+      end
+      string = "Exportado em #{Date.today} às #{Time.now.strftime("%k:%M")}"
+      options = { at: [bounds.right - 200, 0],
+                  width: 200,
+                  align: :right }
+      number_pages string, options
     end.render
   end
 
