@@ -11,7 +11,12 @@ require 'cpf_gen'
 require 'cnpj_gen'
 
 # Create DEV user
-dev = User::create name: 'dev', password: 'dev', role: 0
+dev = User::create name: 'DEV', password: 'dev', role: 0
+User::create name: 'ADMINISTRADOR', password: 'admin', role: 1
+User::create name: 'SUPERVISOR', password: 'super', role: 2
+User::create name: 'OPERADOR', password: 'op', role: 3
+User::create name: 'SINDICO', password: 'sin', role: 4
+#User::create 
 
 puts 'Generating data...'
 

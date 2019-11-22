@@ -3,6 +3,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  before_save do
+    name.upcase!
+    number.upcase!
+  end
+
   # Roles:
   # 0: dev: allow all
   # 1: admin: allow all

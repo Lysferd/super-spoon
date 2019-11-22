@@ -7,13 +7,13 @@
     %p Nada encontrado.
   - else
     %table
-      %th Nome de Usuário
+      %th Nome
       %th Senha
-      %th Role
+      %th Função
       - @users.each do |user|
         %tr
           %td= link_to user.name, user
-          %td (hidden)
+          %td (oculto)
           %td= user.role_str
 
   Total:
