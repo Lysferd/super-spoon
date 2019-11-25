@@ -5,7 +5,6 @@ class User < ApplicationRecord
 
   before_save do
     name.upcase!
-    number.upcase!
   end
 
   # Roles:

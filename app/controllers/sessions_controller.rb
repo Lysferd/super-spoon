@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-  
   skip_before_action :authorize
+  #authorize_resource :class => false
 
   def new
   end

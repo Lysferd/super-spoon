@@ -16,7 +16,7 @@ User::create name: 'ADMINISTRADOR', password: 'admin', role: 1
 User::create name: 'SUPERVISOR', password: 'super', role: 2
 User::create name: 'OPERADOR', password: 'op', role: 3
 User::create name: 'SINDICO', password: 'sin', role: 4
-#User::create 
+User::create name: 'CONDOMINO', password: 'con', role: 5
 
 puts 'Generating data...'
 

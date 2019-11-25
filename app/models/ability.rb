@@ -4,9 +4,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.role? :dev
-      can :manage, :all
-    end
+    can :manage, :all
+    return
+  
+
+    user ||= User::new
 
     case user.role?
       when :dev
@@ -22,6 +24,8 @@ class Ability
         can :manage, Resident
       when :resident
         can :create, Visit
+      else
+        can :manage, :all
       end
 
     # Define abilities for the passed in user here. For example:
