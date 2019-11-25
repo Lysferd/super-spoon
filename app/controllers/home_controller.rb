@@ -35,10 +35,10 @@ class HomeController < ApplicationController
 
       if !@visitor && params[:name]
         if params[:purpose] == 'particular'
-          @visitor = Visitor.new(cpf: params[:cpf], name: params[:name])
+          @visitor = Visitor.new(cpf: params[:cpf], name: params[:name], plate: params[:plate])
         else
           params[:company_id] = params[:company][:id] if params[:company]
-          @visitor = Employee.new(cpf: params[:cpf], name: params[:name], company_id: params[:company_id])
+          @visitor = Employee.new(cpf: params[:cpf], name: params[:name], company_id: params[:company_id], plate: params[:plate])
         end
       end
     end

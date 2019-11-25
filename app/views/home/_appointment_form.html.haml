@@ -24,6 +24,7 @@
       = hidden_field_tag :purpose, params[:purpose]
       = hidden_field_tag :cpf, @visitor.cpf
       = hidden_field_tag :name, @visitor.name
+      = hidden_field_tag :plate, @visitor.plate
       - if params[:purpose] == 'professional'
         = hidden_field_tag :company_id, params[:company_id]
         = hidden_field_tag :visitor_type, Employee.to_s

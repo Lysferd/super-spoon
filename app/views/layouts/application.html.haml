@@ -9,6 +9,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     - if current_user
+      .float-l= image_tag "logo.png", size: 30
+      .float-r= image_tag "logoMA.png", size: 30
       .container#menu
         = link_to 'Nova Visita', root_path
         |

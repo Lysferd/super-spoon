@@ -16,6 +16,14 @@
           = hidden_field_tag :name, @visitor.name
         - else
           = text_field_tag :name, '',required: true, autofocus: true
+    .row
+      .col-25= label_tag :plate, 'Placa do Veículo'
+      .col-75
+        - if @visitor
+          = text_field_tag :plate, @visitor.plate, disabled:true
+          = hidden_field_tag :plate, @visitor.plate
+        - else
+          = text_field_tag :plate
     - if params[:purpose] == "professional"
       .row
         .col-25= label_tag :company, 'Empresa:'

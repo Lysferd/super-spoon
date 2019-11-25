@@ -1,4 +1,5 @@
 class FacilitiesController < ApplicationController
+  load_and_authorize_resource
   before_action :set_facility, only: [:show, :edit, :update, :destroy]
 
   # GET /facilities

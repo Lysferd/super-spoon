@@ -4,11 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, :all
-    return
+#    can :manage, :all
+#    return
   
 
     user ||= User::new
+    cannot :destroy, :all
 
     case user.role?
       when :dev
@@ -16,14 +17,15 @@ class Ability
       when :admin
         can :manage, :all
       when :supervisor
-        can :read, Home
+        can :read, :all
+        cannot :read, User
       when :operator
-        can :read, Home
-        can :manage, Visit
+        can [:read, :create], Appointment
       when :manager
         can :manage, Resident
+        cannot :destroy, Resident
       when :resident
-        can :create, Visit
+        can :create, [Appointment, Visitor]
       else
         can :manage, :all
       end

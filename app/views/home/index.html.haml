@@ -4,14 +4,17 @@
   %hr
 
   = form_with method: :get, local: true do
-    .row
-      .col-25
-        = label_tag :purpose, 'Motivo da Visita:'
-      .col-75
-        = radio_button_tag :purpose, 'particular', params[:purpose] == 'particular', required: true
-        = label :particular, 'Particular', for: :purpose_particular
-        = radio_button_tag :purpose, 'professional', params[:purpose] == 'professional'
-        = label :professional, 'Profissional (Serviço)', for: :purpose_professional
+    - if can? :manage, Company
+      .row
+        .col-25
+          = label_tag :purpose, 'Motivo da Visita:'
+        .col-75
+          = radio_button_tag :purpose, 'particular', params[:purpose] == 'particular', required: true
+          = label :particular, 'Particular', for: :purpose_particular
+          = radio_button_tag :purpose, 'professional', params[:purpose] == 'professional'
+          = label :professional, 'Profissional (Serviço)', for: :purpose_professional
+    - else
+      = hidden_field_tag :purpose, 'particular'
     .row
       .col-25
         = label_tag :facility, 'Localidade:'

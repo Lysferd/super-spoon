@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // This is pure debugging.
+body
+//  background-image: url("logo.png")
+//  background-repeat: repeat
+//  background-size: 10%
+
 .bordered
   border: 1px dotted black
   box-sizing: border-box
@@ -10,17 +15,31 @@
 
 .float-r
   float: right
+  img
+    margin: 5px
 
 .float-l
   float: left
+  img
+    margin: 5px
 
 #menu
+  background-color: black
   text-align: center
   margin: auto
+  width: auto
+  a
+    color: silver
 
-form, .float-r
-  margin: 10px 10px 10px 10px
-  text-align: center
+span
+  display: inline-block
+  vertical-align: middle
+  line-height: normal
+
+form
+  .float-r
+    margin: 10px 10px 10px 10px
+    text-align: center
 
 input[type=text],
 input[type=number],
@@ -87,8 +106,13 @@ h1
 
 .container
   @extend %container-shared
-  margin: 5px
+  margin: auto
+  margin-top: 5px
   padding: 10px
+  width: 680px
+  .container
+    width: auto
+    margin: auto
 
 .small-container
   @extend %container-shared
@@ -149,7 +173,7 @@ h1
 
 
 @media screen and (max-width: 600px)
-  .col-25, .col-75, input[type=submit]
+  .col-25, .col-75, input[type=submit], .container
     width: 100%
     margin-top: 5px
 
