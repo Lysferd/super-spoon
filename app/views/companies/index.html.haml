@@ -20,5 +20,6 @@
             %td
               - company.employees.each do |employee|
                 = link_to employee.name, employee
-  Total:
-  = @companies.count
+  %p
+    Total:
+    = @companies.count

@@ -1,11 +1,12 @@
-.small-container
-  = form_with url: sessions_path do
-    .row
-      .col-25= label_tag :name, 'Usuário'
-      .col-75= text_field_tag :name
+.invisible-container
+  .small-container
+    = form_with url: sessions_path do
+      .row
+        .col-25= label_tag :name, 'Usuário'
+        .col-75= text_field_tag :name
 
-    .row
-      .col-25= label_tag :password, 'Senha'
-      .col-75= password_field_tag :password
+      .row
+        .col-25= label_tag :password, 'Senha'
+        .col-75= password_field_tag :password
 
-    .row= submit_tag 'Login', disable_with: 'Processando...'
+      .row= submit_tag 'Login', disable_with: 'Processando...'
