@@ -9,26 +9,43 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     - if current_user
-      .float-l= image_tag "logo.png", size: 30
-      .float-r= image_tag "logoMA.png", size: 30
+      .float-l
+        = link_to 'http://www.asesat.com.br', target: :_blank do
+          = image_tag 'logo.png', size: 30
+
+      .float-r
+        = link_to 'mailto:fabio@moritzalmeida.eng.br' do
+          = image_tag 'email.png', size: 30
+
+        = link_to 'http://www.moritzalmeida.eng.br', target: :_blank do
+          = image_tag 'logoMA.png', size: 30
+
       .container#menu
-        = link_to 'Nova Visita', root_path
-        |
-        = link_to 'Histórico', records_path
-        |
-        = link_to 'Prédios', facilities_path
-        |
-        = link_to 'Moradores', residents_path
-        |
-        = link_to 'Empresas', companies_path
-        |
-        = link_to 'Funcionários', employees_path
-        |
-        = link_to 'Visitantes', visitors_path
-        |
-        = link_to 'Visitas', appointments_path
-        |
-        - if current_user.role? == :dev
+        - if can? :create, Appointment
+          = link_to 'Nova Visita', root_path
+          |
+        - if current_user.role <= 3
+          = link_to 'Histórico', records_path
+          |
+        - if can? :manage, Facility
+          = link_to 'Prédios', facilities_path
+          |
+        - if can? :manage, Resident
+          = link_to 'Moradores', residents_path
+          |
+        - if can? :manage, Company
+          = link_to 'Empresas', companies_path
+          |
+        - if can? :manage, Employee
+          = link_to 'Funcionários', employees_path
+          |
+        - if can? :manage, Visitor
+          = link_to 'Visitantes', visitors_path
+          |
+        - if can? :manage, Appointment
+          = link_to 'Visitas', appointments_path
+          |
+        - if can? :manage, User
           = link_to 'Usuários', users_path
           |
         = link_to 'Logout', logout_path

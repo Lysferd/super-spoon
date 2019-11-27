@@ -4,10 +4,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-#    can :manage, :all
-#    return
-  
-
     user ||= User::new
     cannot :destroy, :all
 
@@ -26,8 +22,6 @@ class Ability
         cannot :destroy, Resident
       when :resident
         can :create, [Appointment, Visitor]
-      else
-        can :manage, :all
       end
 
     # Define abilities for the passed in user here. For example:

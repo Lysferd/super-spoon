@@ -10,11 +10,18 @@ class SessionsController < ApplicationController
     if user and user.authenticate(params[:password])
       session[:user_id] = user.id
       
-      path = user.id == 1 ? dev_path : root_path
+      path = case user.role?
+             when :dev then dev_path
+             when :admin then root_path
+             when :supervisor then records_path
+             when :operator then root_path
+             when :manager then residents_path
+             when :resident then root_path
+             end
+
       redirect_to path, notice: 'Logou com sucesso.'
     else
-      flash.now[:alert] = 'Nome e/ou senha inválidos.'
-      render 'new'
+      redirect_to login_path, alert: 'Nome e/ou senha inválidos.'
     end
   end
 
