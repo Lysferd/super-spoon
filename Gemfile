@@ -39,8 +39,8 @@ gem 'bootstrap-datepicker-rails'
 gem 'jquery-rails'
 gem 'jquery-timepicker-rails'
 
-# PDF kit
-#gem 'pdfkit'
+# Barnes gem for Heroku Metrics (Beta)
+gem 'barnes'
 
 # PDF Handler: Prawn
 gem 'prawn-rails'
